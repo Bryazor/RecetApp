@@ -10,7 +10,6 @@ import java.util.List;
 import dad.recetapp.db.BaseDatos;
 import dad.recetapp.services.ITipoIngredienteService;
 import dad.recetapp.services.ServiceException;
-import dad.recetapp.services.items.TipoAnotacionItem;
 import dad.recetapp.services.items.TipoIngredienteItem;
 
 public class TipoIngredienteService implements ITipoIngredienteService {
