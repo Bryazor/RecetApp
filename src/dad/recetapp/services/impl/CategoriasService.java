@@ -29,11 +29,9 @@ public class CategoriasService implements ICategoriaServices {
 			statment.executeUpdate();
 			statment.close();
 		} catch (SQLException e) {
-			throw new ServiceException("Error al crear la categoria '"
-					+ categoria.getDescripcion() + "' ", e);
+			throw new ServiceException("Error al crear la categoria '" + categoria.getDescripcion() + "' ", e);
 		} catch (NullPointerException e) {
-			throw new ServiceException(
-					"Error al crear la categoria: La categoria no puede ser nula");
+			throw new ServiceException("Error al crear la categoria: La categoria no puede ser nula");
 		}
 	}
 
@@ -63,8 +61,7 @@ public class CategoriasService implements ICategoriaServices {
 			statment.executeUpdate();
 			statment.close();
 		} catch (SQLException e) {
-			throw new ServiceException("Error al eliminar la categoria con id '"
-					+ id + "' ", e);
+			throw new ServiceException("Error al eliminar la categoria con ID '" + id + "' ", e);
 		} catch (NullPointerException e) {
 			throw new ServiceException("Error al eliminar la categoria: Debe especificar el identificador");
 		}

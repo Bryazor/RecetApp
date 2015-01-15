@@ -60,7 +60,7 @@ public class MedidasService implements IMedidasService {
 			statment.executeUpdate();
 			statment.close();
 		} catch (SQLException e) {
-			throw new ServiceException("Error al eliminar la medida con id '" + id + "' ", e);
+			throw new ServiceException("Error al eliminar la medida con ID '" + id + "' ", e);
 		} catch (NullPointerException e) {
 			throw new ServiceException("Error al eliminar la medida: Debe especificar el identificador");
 		}
