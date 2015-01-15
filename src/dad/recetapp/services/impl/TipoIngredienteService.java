@@ -12,6 +12,9 @@ import dad.recetapp.services.ITipoIngredienteService;
 import dad.recetapp.services.ServiceException;
 import dad.recetapp.services.items.TipoIngredienteItem;
 
+
+// prueba
+
 public class TipoIngredienteService implements ITipoIngredienteService {
 
 	public TipoIngredienteService() {
