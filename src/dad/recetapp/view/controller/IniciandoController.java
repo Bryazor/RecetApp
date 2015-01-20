@@ -1,4 +1,4 @@
-package dad.recetapp.controller;
+package dad.recetapp.view.controller;
 
 import dad.recetapp.view.MainApp;
 import javafx.fxml.FXML;

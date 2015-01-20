@@ -39,10 +39,8 @@ public class MainApp extends Application {
 
                 @Override
                 public void handle(ActionEvent event) {
-                	initStage.close();
-                    
+                	initStage.close(); 
                     initRootLayout();
-
                     showPersonOverview();
                 }
             }));

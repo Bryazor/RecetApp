@@ -1,4 +1,4 @@
-package dad.recetapp.controller;
+package dad.recetapp.view.controller;
 
 import java.util.ArrayList;
 import java.util.List;
