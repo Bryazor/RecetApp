@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane prefHeight="441.0" prefWidth="679.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <center>
+      <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+        <tabs>
+          <Tab text="Recetas">
+               <content>
+                 <fx:include fx:id="recetaspane" source="RecetasView.fxml" />
+               </content>
+          </Tab>
+          <Tab text="Categorias">
+               <content>
+                  <fx:include fx:id="categoriaspane" source="CategoriasView.fxml" />
+               </content>
+          </Tab>
+            <Tab text="Ingredientes">
+               <content>
+                  <fx:include fx:id="ingredientespane" source="IngredientesView.fxml" />
+               </content>
+            </Tab>
+            <Tab text="Medidas">
+              <content>
+                  <fx:include fx:id="medidaspane" source="MedidasView.fxml" />
+              </content>
+            </Tab>
+            <Tab text="Anotaciones">
+              <content>
+                 <fx:include fx:id="anotacionespane" source="AnotacionesView.fxml" />
+              </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+   </center>
+   <bottom>
+      <Pane>
+         <children>
+            <Label alignment="BOTTOM_LEFT" text="Recetas 0" BorderPane.alignment="CENTER_LEFT" />
+         </children>
+         <BorderPane.margin>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </BorderPane.margin>
+      </Pane>
+   </bottom>
+</BorderPane>
