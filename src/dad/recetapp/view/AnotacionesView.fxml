@@ -6,37 +6,30 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane prefHeight="200.0" prefWidth="200.0"
-	xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane prefHeight="200.0" prefWidth="200.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="dad.recetapp.view.controller.AnotacionesController">
 	<center>
-		<TableView prefHeight="200.0" prefWidth="200.0"
-			BorderPane.alignment="CENTER">
+		<TableView fx:id="anotacionesTable" editable="true" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
 			<columnResizePolicy>
 				<TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
 			</columnResizePolicy>
 			<columns>
-				<TableColumn prefWidth="75.0" text="Descripcion" />
+				<TableColumn fx:id="descripcionColumn" prefWidth="75.0" text="Descripcion" />
 			</columns>
 		</TableView>
 	</center>
 	<top>
-		<FlowPane maxHeight="-Infinity" maxWidth="-Infinity"
-			minWidth="-Infinity" BorderPane.alignment="CENTER">
+		<FlowPane maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" BorderPane.alignment="CENTER">
 			<children>
 				<GridPane alignment="TOP_CENTER">
 					<children>
 						<Label text="Descripcion :" />
-						<TextField maxHeight="-Infinity" maxWidth="-Infinity"
-							minHeight="-Infinity" GridPane.columnIndex="1">
+						<TextField fx:id="descripcionText" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" GridPane.columnIndex="1">
 							<GridPane.margin>
 								<Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
 							</GridPane.margin>
 						</TextField>
-						<Button minHeight="-Infinity" minWidth="-Infinity"
-							mnemonicParsing="false" prefHeight="25.0" prefWidth="99.0" text="Añadir"
-							GridPane.columnIndex="2" />
-						<Button mnemonicParsing="false" prefHeight="25.0"
-							prefWidth="102.0" text="Eliminar" GridPane.columnIndex="3">
+						<Button minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#anadir" prefHeight="25.0" prefWidth="99.0" text="Añadir" GridPane.columnIndex="2" />
+						<Button mnemonicParsing="false" onAction="#eliminar" prefHeight="25.0" prefWidth="102.0" text="Eliminar" GridPane.columnIndex="3">
 							<padding>
 								<Insets top="1.0" />
 							</padding>
@@ -62,4 +55,3 @@
 		</FlowPane>
 	</top>
 </BorderPane>
-
