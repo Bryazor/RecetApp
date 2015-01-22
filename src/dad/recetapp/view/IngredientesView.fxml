@@ -6,26 +6,20 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane prefHeight="200.0" prefWidth="200.0"
-	xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dad.recetapp.view.controller.IngredientesController">
 	<top>
-		<FlowPane columnHalignment="CENTER" maxHeight="-Infinity"
-			maxWidth="-Infinity" minWidth="-Infinity" BorderPane.alignment="CENTER">
+		<FlowPane columnHalignment="CENTER" BorderPane.alignment="CENTER">
 			<children>
 				<GridPane alignment="TOP_CENTER">
 					<children>
 						<Label text="Nombre :" />
-						<TextField maxHeight="-Infinity" maxWidth="-Infinity"
-							minHeight="-Infinity" GridPane.columnIndex="1">
+						<TextField fx:id="nombreText" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" GridPane.columnIndex="1">
 							<GridPane.margin>
 								<Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
 							</GridPane.margin>
 						</TextField>
-						<Button minHeight="-Infinity" minWidth="-Infinity"
-							mnemonicParsing="false" prefHeight="25.0" prefWidth="99.0" text="Añadir"
-							GridPane.columnIndex="2" />
-						<Button mnemonicParsing="false" prefHeight="25.0"
-							prefWidth="102.0" text="Eliminar" GridPane.columnIndex="3">
+						<Button minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#anadir" prefHeight="25.0" prefWidth="99.0" text="Añadir" GridPane.columnIndex="2" />
+						<Button mnemonicParsing="false" onAction="#eliminar" prefHeight="25.0" prefWidth="102.0" text="Eliminar" GridPane.columnIndex="3">
 							<padding>
 								<Insets top="1.0" />
 							</padding>
@@ -48,15 +42,13 @@
 		</FlowPane>
 	</top>
 	<center>
-		<TableView prefHeight="200.0" prefWidth="200.0"
-			BorderPane.alignment="CENTER">
+		<TableView fx:id="ingredientesTable" editable="true" BorderPane.alignment="CENTER">
 			<columns>
-				<TableColumn prefWidth="75.0" text="Nombre" />
+				<TableColumn fx:id="nombreColumn" maxWidth="1.7976931348623157E308" prefWidth="-1.0" text="Nombre" />
 			</columns>
-			<columnResizePolicy>
-				<TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-			</columnResizePolicy>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
 		</TableView>
 	</center>
 </BorderPane>
-

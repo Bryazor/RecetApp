@@ -3,9 +3,6 @@ package dad.recetapp.view.controller;
 import java.util.List;
 import java.util.Optional;
 
-import dad.recetapp.services.ServiceException;
-import dad.recetapp.services.ServiceLocator;
-import dad.recetapp.services.items.TipoAnotacionItem;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
@@ -20,38 +17,41 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import dad.recetapp.services.ServiceException;
+import dad.recetapp.services.ServiceLocator;
+import dad.recetapp.services.items.TipoIngredienteItem;
 
-public class AnotacionesController {
-
+public class IngredientesController {
 	// lista que contiene los datos
-	private List<TipoAnotacionItem> anotaciones;
+	private List<TipoIngredienteItem> ingredientes;
 	// lista "observable" que envuelve a la lista "variables" 
-	private ObservableList<TipoAnotacionItem> anotacionesList;
+	private ObservableList<TipoIngredienteItem> ingredientesList;
 
 	@FXML
-	private TableView<TipoAnotacionItem> anotacionesTable;
+	private TableView<TipoIngredienteItem> ingredientesTable;
 
 	@FXML
-	private TableColumn<TipoAnotacionItem, String> descripcionColumn;
+	private TableColumn<TipoIngredienteItem, String> nombreColumn;
 
 	@FXML
-	private TextField descripcionText;
+	private TextField nombreText;
 
 	@FXML
 	public void initialize() {
-		anotacionesTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+
+		ingredientesTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 		cargarTabla();
 
-		descripcionColumn.setCellValueFactory(new PropertyValueFactory<TipoAnotacionItem, String>("descripcion"));
-		descripcionColumn.setCellFactory(TextFieldTableCell.<TipoAnotacionItem>forTableColumn());
-		descripcionColumn.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<TipoAnotacionItem,String>>() {
+		nombreColumn.setCellValueFactory(new PropertyValueFactory<TipoIngredienteItem, String>("nombre"));
+		nombreColumn.setCellFactory(TextFieldTableCell.<TipoIngredienteItem>forTableColumn());
+		nombreColumn.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<TipoIngredienteItem,String>>() {
 
 			@Override
-			public void handle(CellEditEvent<TipoAnotacionItem, String> t) {
-				TipoAnotacionItem editado = ((TipoAnotacionItem) t.getTableView().getItems().get(t.getTablePosition().getRow()));
-				editado.setDescripcion(t.getNewValue());	
+			public void handle(CellEditEvent<TipoIngredienteItem, String> t) {
+				TipoIngredienteItem editado = ((TipoIngredienteItem) t.getTableView().getItems().get(t.getTablePosition().getRow()));
+				editado.setNombre(t.getNewValue());	
 				try {
-					ServiceLocator.getTiposAnotacionesService().modificarTipoAnotacion(editado);
+					ServiceLocator.getTiposIngredientesService().modificarTipoIngrediente(editado);
 				} catch (ServiceException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -65,13 +65,13 @@ public class AnotacionesController {
 
 	private void cargarTabla() {
 		try {
-			anotaciones = ServiceLocator.getTiposAnotacionesService().listarTipoAnotaciones();
-			anotacionesList = FXCollections.observableList(anotaciones);
+			ingredientes = ServiceLocator.getTiposIngredientesService().listarTipoIngredientes();
+			ingredientesList = FXCollections.observableList(ingredientes);
 		} catch (ServiceException e) {
 			e.printStackTrace();
 		}
 
-		anotacionesTable.setItems(anotacionesList);
+		ingredientesTable.setItems(ingredientesList);
 	}
 
 
@@ -79,35 +79,35 @@ public class AnotacionesController {
 	@FXML
 	public void anadir() {
 		// creamos un objeto "variable"
-		TipoAnotacionItem anotacion = new TipoAnotacionItem();
-		if(descripcionText.getText().equals("")){
+		TipoIngredienteItem ingrediente = new TipoIngredienteItem();
+		if(nombreText.getText().equals("")){
 			Alert alertError = new Alert(AlertType.ERROR);
 			alertError.setTitle("Error Añadir");
-			alertError.setHeaderText("Descripcion vacia");
-			alertError.setContentText("Por favor, introduzca una descripcion");
+			alertError.setHeaderText("Nombre vacio");
+			alertError.setContentText("Por favor, introduzca un nombre");
 
 			alertError.showAndWait();
 		}else{
-			anotacion.setDescripcion(descripcionText.getText());
+			ingrediente.setNombre(nombreText.getText());
 			// si modificamos la lista "observable", se añade el item a la lista original
 			// y además la tabla se entera automáticamente (porque la tabla está observando a la lista)
 			try {
-				ServiceLocator.getTiposAnotacionesService().crearTipoAnotacion(anotacion);
-				anotaciones.clear();
+				ServiceLocator.getTiposIngredientesService().crearTipoIngrediente(ingrediente);
+				ingredientes.clear();
 				cargarTabla();
 			} catch (ServiceException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			// vaciamos los cuadros de texto
-			descripcionText.clear(); // los mismo que setText("")
+			nombreText.clear(); // los mismo que setText("")
 		}
 
 	}
 
 	@FXML
 	public void eliminar() {
-		if(anotacionesTable.getSelectionModel().isEmpty()){
+		if(ingredientesTable.getSelectionModel().isEmpty()){
 			Alert alertError = new Alert(AlertType.ERROR);
 			alertError.setTitle("Error Eliminar");
 			alertError.setHeaderText("Seleccionar Fila");
@@ -117,15 +117,15 @@ public class AnotacionesController {
 		}else{
 			Alert alert = new Alert(AlertType.CONFIRMATION);
 			alert.setTitle("Eliminar");
-			alert.setHeaderText("Eliminar Anotacion");
+			alert.setHeaderText("Eliminar Ingrediente");
 			alert.setContentText("¿ Seguro que desea eliminar los elemento(s)?");
 
 			Optional<ButtonType> result = alert.showAndWait();
 			if (result.get() == ButtonType.OK){
 				try {
-					for (TipoAnotacionItem tipoanotacionitem : anotacionesTable.getSelectionModel().getSelectedItems()) {
-						ServiceLocator.getTiposAnotacionesService().eliminarTipoAnotacion(tipoanotacionitem.getId());
-						anotacionesList.remove(tipoanotacionitem);
+					for (TipoIngredienteItem tipoingredienteitem : ingredientesTable.getSelectionModel().getSelectedItems()) {
+						ServiceLocator.getTiposIngredientesService().eliminarTipoIngrediente(tipoingredienteitem.getId());
+						ingredientesList.remove(tipoingredienteitem);
 					}
 
 				} catch (ServiceException e) {

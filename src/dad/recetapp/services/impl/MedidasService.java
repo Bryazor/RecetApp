@@ -72,7 +72,7 @@ public class MedidasService implements IMedidasService {
 		MedidaItem medida = null;
 		try {
 			Connection conn = BaseDatos.getConnection();
-			PreparedStatement statment = conn.prepareStatement("select * from categorias");
+			PreparedStatement statment = conn.prepareStatement("select * from medidas");
 			ResultSet rs = statment.executeQuery();
 			while (rs.next()) {
 				medida = new MedidaItem();
@@ -93,7 +93,7 @@ public class MedidasService implements IMedidasService {
 		MedidaItem medida = null;
 		try {
 			Connection conn = BaseDatos.getConnection();
-			PreparedStatement statment = conn.prepareStatement("select * from categorias when id = ?");
+			PreparedStatement statment = conn.prepareStatement("select * from medidas when id = ?");
 			statment.setLong(1, id);
 			ResultSet rs = statment.executeQuery();
 			if (rs.next()) {
@@ -104,7 +104,7 @@ public class MedidasService implements IMedidasService {
 			}			
 			statment.close();
 		} catch (SQLException e) {
-			throw new ServiceException("Error al recuperar la categoria con ID: '" + id + "'", e);
+			throw new ServiceException("Error al recuperar la medida con ID: '" + id + "'", e);
 		} catch (NullPointerException e) {
 			throw new ServiceException("Error al recuperar la medida: Debe especificar el identificador");
 		}

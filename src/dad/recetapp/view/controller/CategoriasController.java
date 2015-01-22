@@ -82,46 +82,65 @@ public class CategoriasController {
 	public void anadir() {
 		// creamos un objeto "variable"
 		CategoriaItem categoria = new CategoriaItem();
-		categoria.setDescripcion(descripcionText.getText());
-		// si modificamos la lista "observable", se añade el item a la lista original
-		// y además la tabla se entera automáticamente (porque la tabla está observando a la lista)
-		try {
-			ServiceLocator.getCategoriasService().crearCategoria(categoria);
-			categorias.clear();
-			cargarTabla();
-		} catch (ServiceException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if(descripcionText.getText().equals("")){
+			Alert alertError = new Alert(AlertType.ERROR);
+			alertError.setTitle("Error Añadir");
+			alertError.setHeaderText("Descripcion vacia");
+			alertError.setContentText("Por favor, introduzca una descripcion");
+
+			alertError.showAndWait();
+		}else{
+			categoria.setDescripcion(descripcionText.getText());
+			// si modificamos la lista "observable", se añade el item a la lista original
+			// y además la tabla se entera automáticamente (porque la tabla está observando a la lista)
+			try {
+				ServiceLocator.getCategoriasService().crearCategoria(categoria);
+				categorias.clear();
+				cargarTabla();
+			} catch (ServiceException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			// vaciamos los cuadros de texto
+			descripcionText.clear(); // los mismo que setText("")
 		}
-		// vaciamos los cuadros de texto
-		descripcionText.clear(); // los mismo que setText("")
+
 	}
 
 	@FXML
 	public void eliminar() {
-		
-		Alert alert = new Alert(AlertType.CONFIRMATION);
-		alert.setTitle("Eliminar");
-		alert.setHeaderText("Eliminar Categoria");
-		alert.setContentText("¿ Seguro que desea eliminar los elemento(s)?");
+		if(categoriasTable.getSelectionModel().isEmpty()){
+			Alert alertError = new Alert(AlertType.ERROR);
+			alertError.setTitle("Error Eliminar");
+			alertError.setHeaderText("Seleccionar Fila");
+			alertError.setContentText("Por favor, seleccione un elemento a eliminar");
 
-		Optional<ButtonType> result = alert.showAndWait();
-		if (result.get() == ButtonType.OK){
-			try {
-				for (CategoriaItem categoriaItem : categoriasTable.getSelectionModel().getSelectedItems()) {
-					ServiceLocator.getCategoriasService().eliminarCategoria(categoriaItem.getId());
-					categoriasList.remove(categoriaItem);
+			alertError.showAndWait();
+		}else{
+			Alert alert = new Alert(AlertType.CONFIRMATION);
+			alert.setTitle("Eliminar");
+			alert.setHeaderText("Eliminar Categoria");
+			alert.setContentText("¿ Seguro que desea eliminar los elemento(s)?");
+
+			Optional<ButtonType> result = alert.showAndWait();
+			if (result.get() == ButtonType.OK){
+				try {
+					for (CategoriaItem categoriaItem : categoriasTable.getSelectionModel().getSelectedItems()) {
+						ServiceLocator.getCategoriasService().eliminarCategoria(categoriaItem.getId());
+						categoriasList.remove(categoriaItem);
+					}
+					
+				} catch (ServiceException e) {
+					Alert alertError = new Alert(AlertType.ERROR);
+					alertError.setTitle("Error Eliminar");
+					alertError.setHeaderText("Error Eliminar");
+					alertError.setContentText("Se ha producido un error al eliminar : "+ e.getMessage());
+
+					alertError.showAndWait();
 				}
-				
-			} catch (ServiceException e) {
-				Alert alertError = new Alert(AlertType.ERROR);
-				alertError.setTitle("Error Eliminar");
-				alertError.setHeaderText("Error Eliminar");
-				alertError.setContentText("Se ha producido un error al eliminar : "+ e.getMessage());
-
-				alertError.showAndWait();
 			}
 		}
+
 
 	}
 
