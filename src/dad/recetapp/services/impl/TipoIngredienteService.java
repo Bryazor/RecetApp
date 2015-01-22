@@ -29,7 +29,7 @@ public class TipoIngredienteService implements ITipoIngredienteService {
 		} catch (SQLException e) {
 			throw new ServiceException("Error al crear el tipo_ingrediente '" + tipo.getNombre() + "' ", e);
 		} catch (NullPointerException e) {
-			throw new ServiceException("Error al crear el tipo_anotacion: El tipo_ingrediente no puede ser nulo");
+			throw new ServiceException("Error al crear el tipo_ingrediente: El tipo_ingrediente no puede ser nulo");
 		}
 	}
 

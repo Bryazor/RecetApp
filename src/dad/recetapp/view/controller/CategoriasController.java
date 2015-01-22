@@ -1,12 +1,10 @@
 package dad.recetapp.view.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import dad.recetapp.services.ServiceException;
 import dad.recetapp.services.ServiceLocator;
-import dad.recetapp.services.impl.CategoriasService;
 import dad.recetapp.services.items.CategoriaItem;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

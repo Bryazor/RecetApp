@@ -20,7 +20,6 @@ import javafx.scene.control.cell.TextFieldTableCell;
 import dad.recetapp.services.ServiceException;
 import dad.recetapp.services.ServiceLocator;
 import dad.recetapp.services.items.MedidaItem;
-import dad.recetapp.services.items.MedidaItem;
 
 public class MedidasController {
 	// lista que contiene los datos
