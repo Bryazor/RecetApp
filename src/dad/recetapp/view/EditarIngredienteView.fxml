@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+	<bottom>
+		<FlowPane alignment="BOTTOM_RIGHT" hgap="10.0" prefHeight="37.0" prefWidth="395.0" BorderPane.alignment="CENTER">
+			<children>
+				<Button id="guardarButton" mnemonicParsing="false" text="Guardar cambios" />
+				<Button id="cancelarButton" mnemonicParsing="false" text="Cancelar" />
+			</children>
+			<BorderPane.margin>
+				<Insets bottom="5.0" right="5.0" />
+			</BorderPane.margin>
+		</FlowPane>
+	</bottom>
+   <top>
+		<GridPane BorderPane.alignment="TOP_LEFT">
+			<columnConstraints>
+				<ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" />
+				<ColumnConstraints hgrow="SOMETIMES" minWidth="-Infinity" />
+			</columnConstraints>
+			<rowConstraints>
+				<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+				<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+				<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+			</rowConstraints>
+			<children>
+				<Label text="Cantidad:">
+					<GridPane.margin>
+						<Insets right="5.0" />
+					</GridPane.margin>
+				</Label>
+				<Label text="Medida:" GridPane.rowIndex="1">
+					<GridPane.margin>
+						<Insets right="5.0" />
+					</GridPane.margin>
+				</Label>
+				<Label text="Tipo:" GridPane.rowIndex="2">
+					<GridPane.margin>
+						<Insets right="5.0" />
+					</GridPane.margin>
+				</Label>
+				<TextField id="canText" GridPane.columnIndex="1" />
+				<ComboBox id="medCombo" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+               </GridPane.margin></ComboBox>
+				<ComboBox id="tipoCombo" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <GridPane.margin>
+                  <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+               </GridPane.margin></ComboBox>
+			</children>
+			<padding>
+				<Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+			</padding>
+		</GridPane>
+   </top>
+</BorderPane>

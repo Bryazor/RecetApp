@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane prefHeight="132.0" prefWidth="481.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+	<bottom>
+		<FlowPane alignment="BOTTOM_RIGHT" hgap="10.0" prefHeight="32.0" prefWidth="462.0" BorderPane.alignment="CENTER">
+			<children>
+				<Button id="addButton" mnemonicParsing="false" text="Añadir" />
+				<Button id="cancelButton" mnemonicParsing="false" text="Cancelar" />
+			</children>
+			<BorderPane.margin>
+				<Insets bottom="5.0" right="5.0" />
+			</BorderPane.margin>
+		</FlowPane>
+	</bottom>
+   <top>
+		<GridPane BorderPane.alignment="CENTER">
+			<columnConstraints>
+				<ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" />
+				<ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" />
+			</columnConstraints>
+			<rowConstraints>
+				<RowConstraints maxHeight="48.0" minHeight="10.0" prefHeight="34.0" vgrow="SOMETIMES" />
+				<RowConstraints maxHeight="1.7976931348623157E308" valignment="TOP" vgrow="SOMETIMES" />
+			</rowConstraints>
+			<children>
+				<Label text="Orden:">
+					<GridPane.margin>
+						<Insets right="5.0" />
+					</GridPane.margin>
+				</Label>
+				<Label text="Descripción:" GridPane.rowIndex="1">
+					<GridPane.margin>
+						<Insets right="5.0" />
+					</GridPane.margin>
+				</Label>
+				<TextField id="ordenText" GridPane.columnIndex="1" />
+				<TextArea id="descTextArea" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+			</children>
+			<padding>
+				<Insets left="5.0" right="5.0" top="5.0" />
+			</padding>
+		</GridPane>
+   </top>
+</BorderPane>
