@@ -26,11 +26,13 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.layout.BorderPane;
 import javafx.util.Callback;
 import dad.recetapp.services.ServiceException;
 import dad.recetapp.services.ServiceLocator;
 import dad.recetapp.services.items.CategoriaItem;
 import dad.recetapp.services.items.RecetaListItem;
+import dad.recetapp.view.MainApp;
 
 public class RecetasController {
 	// lista que contiene los datos
@@ -355,7 +357,7 @@ public class RecetasController {
 
 	@FXML
 	public void anadir() {
-
+		 
 	}
 
 	@FXML
