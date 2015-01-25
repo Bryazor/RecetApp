@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dad.recetapp.view.controller.CPNuevaRecetaController">
    <top>
       <GridPane BorderPane.alignment="CENTER">
 			<columnConstraints>
@@ -24,10 +24,10 @@
 						<Font size="20.0" />
 					</font>
 				</Label>
-				<TextField GridPane.columnIndex="1" />
+				<TextField fx:id="seccionText" GridPane.columnIndex="1" />
 				<FlowPane alignment="CENTER_RIGHT" columnHalignment="RIGHT" GridPane.columnIndex="2">
 					<children>
-						<Button mnemonicParsing="false" prefHeight="25.0" prefWidth="42.0" text="-" />
+						<Button fx:id="menosButton" mnemonicParsing="false" onAction="#menos" prefHeight="25.0" prefWidth="42.0" text="-" />
 					</children>
 				</FlowPane>
 			</children>
@@ -41,11 +41,11 @@
 			<items>
 				<BorderPane>
 					<center>
-						<TableView prefHeight="164.0" prefWidth="416.0" BorderPane.alignment="CENTER">
+						<TableView fx:id="ingredienteTable" prefHeight="164.0" prefWidth="416.0" BorderPane.alignment="CENTER">
 							<columns>
-								<TableColumn prefWidth="75.0" text="Cantidad" />
-								<TableColumn prefWidth="75.0" text="Medida" />
-								<TableColumn prefWidth="75.0" text="Tipo" />
+								<TableColumn fx:id="cantidadColumn" prefWidth="75.0" text="Cantidad" />
+								<TableColumn fx:id="medidaColumn" prefWidth="75.0" text="Medida" />
+								<TableColumn fx:id="tipoColumn" prefWidth="75.0" text="Tipo" />
 							</columns>
 							<columnResizePolicy>
 								<TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -55,9 +55,9 @@
 					<bottom>
 						<FlowPane alignment="CENTER_RIGHT" hgap="5.0" vgap="5.0" BorderPane.alignment="CENTER">
 							<children>
-								<Button fx:id="nuevoIngrediente" mnemonicParsing="false" text="Añadir" />
-								<Button mnemonicParsing="false" text="Editar" />
-								<Button mnemonicParsing="false" text="Eliminar" />
+								<Button fx:id="nuevoIngredienteButton" mnemonicParsing="false" onAction="#nuevoIngrediente" />
+								<Button fx:id="editarIngredienteButton" mnemonicParsing="false" onAction="#editarIngrediente" />
+								<Button fx:id="eliminarIngredienteButton" mnemonicParsing="false" onAction="#eliminarIngrediente" />
 							</children>
 							<opaqueInsets>
 								<Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -72,9 +72,9 @@
 					<bottom>
 						<FlowPane alignment="CENTER_RIGHT" hgap="5.0" vgap="5.0" BorderPane.alignment="CENTER">
 							<children>
-								<Button fx:id="nuevoIngrediente1" mnemonicParsing="false" text="Añadir" />
-								<Button mnemonicParsing="false" text="Editar" />
-								<Button mnemonicParsing="false" text="Eliminar" />
+								<Button fx:id="nuevaInstruccionButton" mnemonicParsing="false" onAction="#nuevaInstruccion" />
+								<Button fx:id="editarInstruccionButton" mnemonicParsing="false" onAction="#editarInstruccion" />
+								<Button fx:id="eliminarInstruccionButton" mnemonicParsing="false" onAction="#eliminarInstruccion" />
 							</children>
 							<opaqueInsets>
 								<Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -85,13 +85,13 @@
 						</FlowPane>
 					</bottom>
 					<center>
-						<TableView BorderPane.alignment="CENTER">
+						<TableView fx:id="instruccionTable" BorderPane.alignment="CENTER">
 							<columnResizePolicy>
 								<TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
 							</columnResizePolicy>
 							<columns>
-								<TableColumn prefWidth="75.0" text="Orden" />
-								<TableColumn prefWidth="75.0" text="Descripcion" />
+								<TableColumn fx:id="ordenColumn" prefWidth="75.0" text="Orden" />
+								<TableColumn fx:id="descripcionColumn" prefWidth="75.0" text="Descripcion" />
 							</columns>
 						</TableView>
 					</center>

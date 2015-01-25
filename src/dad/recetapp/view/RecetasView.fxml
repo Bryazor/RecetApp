@@ -46,7 +46,7 @@
 	<center>
 		<BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
 			<top>
-				<GridPane alignment="TOP_CENTER" BorderPane.alignment="TOP_CENTER">
+				<GridPane fx:id="nortePane" alignment="TOP_CENTER" BorderPane.alignment="TOP_CENTER">
 					<columnConstraints>
 						<ColumnConstraints hgrow="SOMETIMES" minWidth="-Infinity" />
 						<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />

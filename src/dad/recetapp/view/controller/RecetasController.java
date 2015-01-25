@@ -1,11 +1,15 @@
 package dad.recetapp.view.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Optional;
+
+import javax.swing.BorderFactory;
+import javax.swing.border.TitledBorder;
 
 import javafx.beans.InvalidationListener;
 import javafx.beans.property.StringProperty;
@@ -15,6 +19,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
@@ -27,6 +33,9 @@ import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 import dad.recetapp.services.ServiceException;
 import dad.recetapp.services.ServiceLocator;
@@ -56,6 +65,8 @@ public class RecetasController {
 	private TableColumn<RecetaListItem, String> categoriaColumn;
 
 	@FXML
+	private GridPane nortePane;
+	@FXML
 	private TextField nombreText;
 	@FXML
 	private ComboBox<String> minutosCombo;
@@ -67,9 +78,6 @@ public class RecetasController {
 
 	@FXML
 	public void initialize() {
-		System.out.println("cargando");
-
-
 		try {
 			categoriaCombo.getItems().add("<Todas>");
 			for (CategoriaItem categoriaItem : ServiceLocator.getCategoriasService().listarCategorias()) {
@@ -357,7 +365,27 @@ public class RecetasController {
 
 	@FXML
 	public void anadir() {
-		 
+            
+			try {
+				FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("NuevaRecetaView.fxml"));
+				BorderPane ventanaDos;
+				ventanaDos = (BorderPane) loader.load();
+				Stage ventana = new Stage();
+				ventana.setTitle("Nueva Receta");
+				Scene scene = new Scene(ventanaDos);
+				ventana.setScene(scene);
+
+		        ventana.initOwner(MainApp.primaryStage);
+		        ventana.initModality(Modality.WINDOW_MODAL);
+				ventana.show();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+
+	
+
 	}
 
 	@FXML
