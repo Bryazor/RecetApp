@@ -1,24 +1,19 @@
 package dad.recetapp.view.controller;
 
-import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.List;
-
-import javax.swing.plaf.basic.BasicTabbedPaneUI.TabbedPaneLayout;
 
 import dad.recetapp.services.ServiceException;
 import dad.recetapp.services.ServiceLocator;
 import dad.recetapp.services.items.CategoriaItem;
 import dad.recetapp.services.items.RecetaItem;
-import dad.recetapp.services.items.RecetaListItem;
+import dad.recetapp.services.items.SeccionItem;
 import dad.recetapp.view.MainApp;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.TextField;
-import javafx.beans.value.ChangeListener;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
@@ -28,9 +23,8 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.BorderPane;
-import javafx.stage.Stage;
 
-public class NuevaRecetaController {
+public class EditarRecetaController {
 	@FXML 
 	private Parent rootPane;
 	@FXML
@@ -119,7 +113,7 @@ public class NuevaRecetaController {
 
 	// Event Listener on Button.onAction
 	@FXML
-	public void crear(ActionEvent event) throws ServiceException {
+	public void guardar(ActionEvent event) throws ServiceException {
 		if(nombreText.getText().equals("")){
 			Alert alertError = new Alert(AlertType.ERROR);
 			alertError.setTitle("Error Crear");
@@ -135,7 +129,7 @@ public class NuevaRecetaController {
 
 			alertError.showAndWait();
 		}else if((!tryParseInt(paraText.getText()))){
-			
+
 			Alert alertError = new Alert(AlertType.ERROR);
 			alertError.setTitle("Error Crear");
 			alertError.setHeaderText("Introduzca el numero de comensales");
@@ -162,21 +156,54 @@ public class NuevaRecetaController {
 			fecha = Calendar.getInstance();
 			receta.setFechaCreacion(fecha.getTime());
 			receta.setPara(paraCombo.getSelectionModel().getSelectedItem());
-			
+
 			System.out.println("OK");
 		}
 	}
-	
+
+	public RecetaItem getReceta() {
+		return receta;
+	}
+
+	public void setReceta(RecetaItem receta2) {
+		this.receta = receta2;
+		nombreText.setText(receta.getNombre());
+		categoriaCombo.getSelectionModel().select(receta.getCategoria().getDescripcion());
+		paraText.setText(receta.getCantidad().toString());
+		paraCombo.getSelectionModel().select(receta.getPara());
+		minutosTotalCombo.getSelectionModel().select(receta.getTiempoTotal()/60);
+		segundosTotalCombo.getSelectionModel().select(receta.getTiempoTotal()%60);
+		minutosThermoCombo.getSelectionModel().select(receta.getTiempoThermomix()/60);
+		segundosThermoCombo.getSelectionModel().select(receta.getTiempoThermomix()%60);
+		List<SeccionItem> secciones =receta.getSecciones();
+		for (SeccionItem seccionItem : secciones) {
+			
+			Tab nuevo =new Tab(seccionItem.getNombre());
+			tabPane.getTabs().set(0, nuevo);
+			FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("CPNuevaRecetaView.fxml"));
+			BorderPane ventanaDos;
+			try {
+				ventanaDos = (BorderPane) loader.load();
+				((CPNuevaRecetaController)loader.getController()).setSeccion(seccionItem);
+				nuevo.setContent(ventanaDos);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+	}
+
 	boolean tryParseInt(String value)  
 	{  
-	     try  
-	     {  
-	         Integer.parseInt(value);  
-	         return true;  
-	      } catch(NumberFormatException nfe)  
-	      {  
-	          return false;  
-	      }  
+		try  
+		{  
+			Integer.parseInt(value);  
+			return true;  
+		} catch(NumberFormatException nfe)  
+		{  
+			return false;  
+		}  
 	}
 	// Event Listener on Button.onAction
 	@FXML

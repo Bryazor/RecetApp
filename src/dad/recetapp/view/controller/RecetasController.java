@@ -41,9 +41,11 @@ import dad.recetapp.services.ServiceException;
 import dad.recetapp.services.ServiceLocator;
 import dad.recetapp.services.items.CategoriaItem;
 import dad.recetapp.services.items.RecetaListItem;
+import dad.recetapp.services.items.TipoAnotacionItem;
 import dad.recetapp.view.MainApp;
 
 public class RecetasController {
+	public static Stage ventana;
 	// lista que contiene los datos
 	private List<RecetaListItem> recetas;
 	// lista "observable" que envuelve a la lista "variables" 
@@ -111,6 +113,22 @@ public class RecetasController {
 		});
 
 		categoriaCombo.valueProperty().addListener(new ChangeListener<String>() {
+			@Override
+			public void changed(ObservableValue<? extends String> observable,
+					String oldValue, String newValue) {
+				updateFilteredData();
+			}
+		});
+
+		minutosCombo.valueProperty().addListener(new ChangeListener<String>() {
+			@Override
+			public void changed(ObservableValue<? extends String> observable,
+					String oldValue, String newValue) {
+				updateFilteredData();
+			}
+		});
+
+		segundosCombo.valueProperty().addListener(new ChangeListener<String>() {
 			@Override
 			public void changed(ObservableValue<? extends String> observable,
 					String oldValue, String newValue) {
@@ -336,7 +354,8 @@ public class RecetasController {
 	 */
 	private boolean matchesFilter(RecetaListItem receta) {
 		String filterString = nombreText.getText();
-		if ((filterString == null || filterString.isEmpty()) &&(categoriaCombo.getValue().equals("<Todas>"))) {
+		if ((filterString == null || filterString.isEmpty()) &&(categoriaCombo.getValue().equals("<Todas>")) && (minutosCombo.getValue().equals("0")) &&(
+				segundosCombo.getValue().equals("0"))) {
 			// No filter --> Add all.
 			return true;
 		}
@@ -352,8 +371,28 @@ public class RecetasController {
 				return true;
 			} 
 		}
+		if(!(minutosCombo.getValue().equals("0"))){
+			if(!(segundosCombo.getValue().equals("0"))){
+				if(receta.getTiempoTotal() < ((Integer.valueOf(minutosCombo.getValue())*60)+Integer.valueOf(segundosCombo.getValue()))){
+					return true;
+					
+				}
+			}else{
+				System.out.println("dentro else");
 
-		
+				if(receta.getTiempoTotal()<= ((Integer.valueOf(minutosCombo.getValue())*60))){
+
+					return true;
+				}
+			}
+		}
+		if(!(segundosCombo.getValue().equals("0"))){
+			if(receta.getTiempoTotal() <= (Integer.valueOf(segundosCombo.getValue()))){
+				return true;
+			}
+		}
+
+
 		return false; // Does not match
 	}
 
@@ -365,31 +404,68 @@ public class RecetasController {
 
 	@FXML
 	public void anadir() {
-            
-			try {
-				FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("NuevaRecetaView.fxml"));
-				BorderPane ventanaDos;
-				ventanaDos = (BorderPane) loader.load();
-				Stage ventana = new Stage();
-				ventana.setTitle("Nueva Receta");
-				Scene scene = new Scene(ventanaDos);
-				ventana.setScene(scene);
 
-		        ventana.initOwner(MainApp.primaryStage);
-		        ventana.initModality(Modality.WINDOW_MODAL);
-				ventana.show();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
+		try {
+			FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("NuevaRecetaView.fxml"));
+			BorderPane ventanaDos;
+			ventanaDos = (BorderPane) loader.load();
+			ventana = new Stage();
+			ventana.setTitle("Nueva Receta");
+			Scene scene = new Scene(ventanaDos);
+			ventana.setScene(scene);
 
-	
+			ventana.initOwner(MainApp.primaryStage);
+			ventana.initModality(Modality.WINDOW_MODAL);
+			ventana.show();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+
+
 
 	}
 
 	@FXML
 	public void editar() {
+
+		if(recetasTable.getSelectionModel().isEmpty()){
+			Alert alertError = new Alert(AlertType.ERROR);
+			alertError.setTitle("Error Editar");
+			alertError.setHeaderText("Seleccionar Fila");
+			alertError.setContentText("Por favor, seleccione una receta a editar");
+
+			alertError.showAndWait();
+		}else{
+			try {
+				FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("EditarRecetaView.fxml"));
+				BorderPane ventanaDos;
+				ventanaDos = (BorderPane) loader.load();
+				try {
+					((EditarRecetaController) loader.getController()).setReceta(ServiceLocator.getRecetasService().obtenerReceta(
+							recetasTable.getSelectionModel().getSelectedItem().getId()));
+				} catch (ServiceException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+				ventana = new Stage();
+				ventana.setTitle("Editar Receta");
+				Scene scene = new Scene(ventanaDos);
+				ventana.setScene(scene);
+				ventana.initOwner(MainApp.primaryStage);
+				ventana.initModality(Modality.WINDOW_MODAL);
+				ventana.show();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
+
+
+
 
 	}
 
