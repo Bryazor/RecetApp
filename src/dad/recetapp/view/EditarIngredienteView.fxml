@@ -6,12 +6,12 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane fx:id="borderpane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dad.recetapp.view.controller.EditarIngredienteController">
 	<bottom>
 		<FlowPane alignment="BOTTOM_RIGHT" hgap="10.0" prefHeight="37.0" prefWidth="395.0" BorderPane.alignment="CENTER">
 			<children>
-				<Button id="guardarButton" mnemonicParsing="false" text="Guardar cambios" />
-				<Button id="cancelarButton" mnemonicParsing="false" text="Cancelar" />
+				<Button id="guardarButton" mnemonicParsing="false" onAction="#guardar" text="Guardar cambios" />
+				<Button id="cancelarButton" mnemonicParsing="false" onAction="#cancelar" text="Cancelar" />
 			</children>
 			<BorderPane.margin>
 				<Insets bottom="5.0" right="5.0" />
@@ -45,12 +45,12 @@
 						<Insets right="5.0" />
 					</GridPane.margin>
 				</Label>
-				<TextField id="canText" GridPane.columnIndex="1" />
-				<ComboBox id="medCombo" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+				<TextField id="cantidadText" fx:id="cantidadText" GridPane.columnIndex="1" />
+				<ComboBox id="medidadCombo" fx:id="medidaCombo" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                </GridPane.margin></ComboBox>
-				<ComboBox id="tipoCombo" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+				<ComboBox id="tipoCombo" fx:id="tipoCombo" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <GridPane.margin>
                   <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                </GridPane.margin></ComboBox>

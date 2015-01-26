@@ -19,8 +19,14 @@ public class EditarInstruccionController {
 	
 	private InstruccionItem instruccion = null;
 	
-	
+	private boolean guardar = false;
 
+	public boolean isGuardar() {
+		return guardar;
+	}
+	public void setGuardar(boolean guardar) {
+		this.guardar = guardar;
+	}
 	public InstruccionItem getInstruccion() {
 		return instruccion;
 	}
@@ -59,6 +65,7 @@ public class EditarInstruccionController {
 			instruccion.setOrden(Integer.valueOf(ordenText.getText()));
 			instruccion.setDescripcion(descripcionText.getText());
 			
+			guardar=true;
 			borderpane.getScene().getWindow().hide();
 
 			

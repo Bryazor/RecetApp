@@ -50,6 +50,14 @@ public class EditarRecetaController {
 	@FXML
 	private TabPane tabPane;
 
+	boolean guardar=false;
+	public boolean isGuardar() {
+		return guardar;
+	}
+
+	public void setGuardar(boolean guardar) {
+		this.guardar = guardar;
+	}
 	RecetaItem receta=null;
 
 	@FXML
@@ -87,23 +95,17 @@ public class EditarRecetaController {
 		minutosThermoCombo.setValue("0");
 
 		nuevaTab.setClosable(false);
-		
+
 		nuevaTab.onSelectionChangedProperty().set(new EventHandler<Event>() {
 
 			@Override
 			public void handle(Event event) {
 				Tab nuevo =new Tab("");
 				tabPane.getTabs().add(tabPane.getTabs().size()-1,nuevo);
-				FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("CPNuevaRecetaView.fxml"));
-				BorderPane ventanaDos;
-				try {
-					ventanaDos = (BorderPane) loader.load();
-					((CPNuevaRecetaController)loader.getController()).getSeccion();
-					nuevo.setContent(ventanaDos);
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				Componente comp = new Componente();
+
+
+				nuevo.setContent(comp);
 
 				tabPane.getSelectionModel().select(nuevo);
 
@@ -157,8 +159,17 @@ public class EditarRecetaController {
 			fecha = Calendar.getInstance();
 			receta.setFechaCreacion(fecha.getTime());
 			receta.setPara(paraCombo.getSelectionModel().getSelectedItem());
-
 			
+			//nuevo
+			receta.getSecciones().clear();
+			for (int i = 0; i < tabPane.getTabs().size()-1; i++) {
+				if(!((Componente)tabPane.getTabs().get(i).getContent()).getSeccion().getNombre().equals("")){
+					receta.getSecciones().add(((Componente)tabPane.getTabs().get(i).getContent()).getSeccion());
+					System.out.println(i);
+				}
+				
+			}
+			guardar=true;
 			borderpane.getScene().getWindow().hide();
 		}
 	}
@@ -178,23 +189,26 @@ public class EditarRecetaController {
 		minutosThermoCombo.getSelectionModel().select(receta.getTiempoThermomix()/60);
 		segundosThermoCombo.getSelectionModel().select(receta.getTiempoThermomix()%60);
 		List<SeccionItem> secciones =receta.getSecciones();
-		for (SeccionItem seccionItem : secciones) {
-			
-			Tab nuevo =new Tab(seccionItem.getNombre());
-			tabPane.getTabs().set(0, nuevo);
-			FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("CPNuevaRecetaView.fxml"));
-			BorderPane ventanaDos;
-			try {
-				ventanaDos = (BorderPane) loader.load();
-				((CPNuevaRecetaController)loader.getController()).setSeccion(seccionItem);
-				nuevo.setContent(ventanaDos);
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+		if(secciones.size()>0){
+			for (SeccionItem seccionItem : secciones) {
+				System.out.println(seccionItem.getNombre());
+				Tab nuevo =new Tab(seccionItem.getNombre());
+				Componente com = new Componente();
+				com.setSeccion(seccionItem);
+				nuevo.setContent(com);
+				tabPane.getTabs().add(0, nuevo);
 			}
+		}else{
+			Tab nuevo =new Tab("");
+			Componente com = new Componente();
+			nuevo.setContent(com);
+			tabPane.getTabs().add(0, nuevo);
 		}
 		
+		tabPane.getSelectionModel().select(0);
 	}
+
+
 
 	boolean tryParseInt(String value)  
 	{  

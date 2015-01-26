@@ -105,17 +105,44 @@ public class RecetasService implements IRecetasService {
 			for (AnotacionItem anotacion : recetaActual.getAnotaciones()) {
 				eliminarAnotacion(anotacion);
 			}
+			System.out.println("-------");
+			for (SeccionItem seccion : receta.getSecciones()) {
+				System.out.println(seccion.getId());
+			}
+			System.out.println("-------");
 			
+			
+			System.out.println("-------111");
+			for (SeccionItem seccion : recetaActual.getSecciones()) {
+				System.out.println(seccion.getId());
+			}
+			System.out.println("-------111");
 			// crear las secciones
+			List<SeccionItem> aux = new ArrayList<>();
 			for (SeccionItem seccion : receta.getSecciones()) {
 				if (seccion.getId() == null) {
 					crearSeccion(receta.getId(), seccion);
 				} else {
+					System.out.println("modifca"+seccion.getId());
 					modificarSeccion(seccion);
-					recetaActual.getSecciones().remove(seccion);
+					for (SeccionItem seccionitem : recetaActual.getSecciones()) {
+						if(seccionitem.getId()==seccion.getId()){
+							aux.add(seccionitem);
+						}
+					}
+					
 				}
 			}
+			recetaActual.getSecciones().removeAll(aux);
+			System.out.println("-------2222");
 			for (SeccionItem seccion : recetaActual.getSecciones()) {
+				System.out.println(seccion.getId());
+			}
+			System.out.println("-------2222");
+			
+			
+			for (SeccionItem seccion : recetaActual.getSecciones()) {
+				System.out.println("Elimuina"+seccion.getId());
 				eliminarSeccion(seccion);
 			}
 			

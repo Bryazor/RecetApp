@@ -5,6 +5,8 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.BorderPane?>
+<?import dad.recetapp.view.controller.* ?>
+<?scenebuilder-classpath-element ../../../../../../../target/MyJavaFX.jar?>
 
 <BorderPane fx:id="borderpane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dad.recetapp.view.controller.NuevaRecetaController">
 	<bottom>
@@ -112,7 +114,7 @@
 			<tabs>
 				<Tab fx:id="seccionTab">
 					<content>
-						<fx:include fx:id="anotacionespane" source="CPNuevaRecetaView.fxml" />
+						<Componente />
 					</content>
 				</Tab>
 				<Tab fx:id="nuevaTab" text="+">

@@ -474,7 +474,7 @@ public class RecetasController {
 				ventana.initOwner(MainApp.primaryStage);
 				ventana.initModality(Modality.WINDOW_MODAL);
 				ventana.showAndWait();
-				if(!(((EditarRecetaController)loader.getController()).getReceta()==null)){
+				if((((EditarRecetaController)loader.getController()).isGuardar())){
 					RecetaItem recetaitem = ((EditarRecetaController)loader.getController()).getReceta();
 					try {
 						ServiceLocator.getRecetasService().modificarReceta(recetaitem);

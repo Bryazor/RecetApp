@@ -108,16 +108,10 @@ public class NuevaRecetaController {
 			public void handle(Event event) {
 				Tab nuevo =new Tab("");
 				tabPane.getTabs().add(tabPane.getTabs().size()-1,nuevo);
-				FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("CPNuevaRecetaView.fxml"));
-				BorderPane ventanaDos;
-				try {
-					ventanaDos = (BorderPane) loader.load();
-					((CPNuevaRecetaController)loader.getController()).getSeccion();
-					nuevo.setContent(ventanaDos);
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				Componente comp = new Componente();
+				
+
+					nuevo.setContent(comp);
 
 				tabPane.getSelectionModel().select(nuevo);
 
@@ -175,6 +169,14 @@ public class NuevaRecetaController {
 			
 			System.out.println("OK");
 			
+			receta.getSecciones().clear();
+			for (int i = 0; i < tabPane.getTabs().size()-1; i++) {
+				if(!((Componente)tabPane.getTabs().get(i).getContent()).getSeccion().getNombre().equals("")){
+					receta.getSecciones().add(((Componente)tabPane.getTabs().get(i).getContent()).getSeccion());
+					System.out.println(i);
+				}
+				
+			}
 			
 			borderpane.getScene().getWindow().hide();
 		}
