@@ -6,7 +6,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane prefHeight="200.0" prefWidth="200.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="dad.recetapp.view.controller.AnotacionesController">
+<BorderPane prefHeight="200.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dad.recetapp.view.controller.AnotacionesController">
 	<center>
 		<TableView fx:id="anotacionesTable" editable="true" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
 			<columnResizePolicy>
@@ -18,7 +18,7 @@
 		</TableView>
 	</center>
 	<top>
-		<FlowPane maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" BorderPane.alignment="CENTER">
+		<FlowPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" BorderPane.alignment="CENTER">
 			<children>
 				<GridPane alignment="TOP_CENTER">
 					<children>

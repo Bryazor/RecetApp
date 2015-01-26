@@ -32,7 +32,7 @@ import javafx.stage.Stage;
 
 public class NuevaRecetaController {
 	@FXML 
-	private Parent rootPane;
+	private BorderPane borderpane;
 	@FXML
 	private TextField nombreText;
 	@FXML
@@ -56,7 +56,15 @@ public class NuevaRecetaController {
 	@FXML
 	private TabPane tabPane;
 
-	RecetaItem receta;
+	RecetaItem receta=null;
+
+	public RecetaItem getReceta() {
+		return receta;
+	}
+
+	public void setReceta(RecetaItem receta) {
+		this.receta = receta;
+	}
 
 	@FXML
 	public void initialize() {
@@ -91,7 +99,9 @@ public class NuevaRecetaController {
 			minutosThermoCombo.getItems().add(String.valueOf(j));
 		}
 		minutosThermoCombo.setValue("0");
-
+		
+		nuevaTab.setClosable(false);
+		
 		nuevaTab.onSelectionChangedProperty().set(new EventHandler<Event>() {
 
 			@Override
@@ -164,6 +174,9 @@ public class NuevaRecetaController {
 			receta.setPara(paraCombo.getSelectionModel().getSelectedItem());
 			
 			System.out.println("OK");
+			
+			
+			borderpane.getScene().getWindow().hide();
 		}
 	}
 	
@@ -182,7 +195,7 @@ public class NuevaRecetaController {
 	@FXML
 	public void cancelar(ActionEvent event) {
 
-		RecetasController.ventana.close();
+		borderpane.getScene().getWindow().hide();
 	}
 
 

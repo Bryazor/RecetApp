@@ -20,6 +20,7 @@ import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
@@ -40,11 +41,15 @@ import javafx.util.Callback;
 import dad.recetapp.services.ServiceException;
 import dad.recetapp.services.ServiceLocator;
 import dad.recetapp.services.items.CategoriaItem;
+import dad.recetapp.services.items.InstruccionItem;
+import dad.recetapp.services.items.RecetaItem;
 import dad.recetapp.services.items.RecetaListItem;
 import dad.recetapp.services.items.TipoAnotacionItem;
 import dad.recetapp.view.MainApp;
 
 public class RecetasController {
+	@FXML
+	public Parent mainframe;
 	public static Stage ventana;
 	// lista que contiene los datos
 	private List<RecetaListItem> recetas;
@@ -416,7 +421,19 @@ public class RecetasController {
 
 			ventana.initOwner(MainApp.primaryStage);
 			ventana.initModality(Modality.WINDOW_MODAL);
-			ventana.show();
+			ventana.showAndWait();
+			if(!(((NuevaRecetaController)loader.getController()).getReceta()==null)){
+				RecetaItem recetaitem = ((NuevaRecetaController)loader.getController()).getReceta();
+				try {
+					ServiceLocator.getRecetasService().crearReceta(recetaitem);
+					recetas.clear();
+					filrecetasList.clear();
+					cargarTabla();
+				} catch (ServiceException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -456,7 +473,19 @@ public class RecetasController {
 				ventana.setScene(scene);
 				ventana.initOwner(MainApp.primaryStage);
 				ventana.initModality(Modality.WINDOW_MODAL);
-				ventana.show();
+				ventana.showAndWait();
+				if(!(((EditarRecetaController)loader.getController()).getReceta()==null)){
+					RecetaItem recetaitem = ((EditarRecetaController)loader.getController()).getReceta();
+					try {
+						ServiceLocator.getRecetasService().modificarReceta(recetaitem);
+						recetas.clear();
+						filrecetasList.clear();
+						cargarTabla();
+					} catch (ServiceException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

@@ -26,7 +26,7 @@ import javafx.scene.layout.BorderPane;
 
 public class EditarRecetaController {
 	@FXML 
-	private Parent rootPane;
+	private BorderPane borderpane;
 	@FXML
 	private TextField nombreText;
 	@FXML
@@ -50,7 +50,7 @@ public class EditarRecetaController {
 	@FXML
 	private TabPane tabPane;
 
-	RecetaItem receta;
+	RecetaItem receta=null;
 
 	@FXML
 	public void initialize() {
@@ -86,6 +86,8 @@ public class EditarRecetaController {
 		}
 		minutosThermoCombo.setValue("0");
 
+		nuevaTab.setClosable(false);
+		
 		nuevaTab.onSelectionChangedProperty().set(new EventHandler<Event>() {
 
 			@Override
@@ -137,7 +139,6 @@ public class EditarRecetaController {
 
 			alertError.showAndWait();
 		}else{
-			receta = new RecetaItem();
 			receta.setNombre(nombreText.getText());
 			CategoriaItem categoria = new CategoriaItem();
 			List<CategoriaItem> categorias =ServiceLocator.getCategoriasService().listarCategorias();
@@ -157,7 +158,8 @@ public class EditarRecetaController {
 			receta.setFechaCreacion(fecha.getTime());
 			receta.setPara(paraCombo.getSelectionModel().getSelectedItem());
 
-			System.out.println("OK");
+			
+			borderpane.getScene().getWindow().hide();
 		}
 	}
 

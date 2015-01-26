@@ -6,9 +6,9 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dad.recetapp.view.controller.IngredientesController">
+<BorderPane prefHeight="484.0" prefWidth="493.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dad.recetapp.view.controller.IngredientesController">
 	<top>
-		<FlowPane columnHalignment="CENTER" BorderPane.alignment="CENTER">
+		<FlowPane alignment="CENTER" columnHalignment="CENTER" BorderPane.alignment="CENTER">
 			<children>
 				<GridPane alignment="TOP_CENTER">
 					<children>

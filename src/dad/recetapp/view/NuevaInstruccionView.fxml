@@ -6,12 +6,12 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane prefHeight="132.0" prefWidth="481.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane fx:id="borderpane" prefHeight="132.0" prefWidth="481.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dad.recetapp.view.controller.NuevaInstruccionController">
 	<bottom>
 		<FlowPane alignment="BOTTOM_RIGHT" hgap="10.0" prefHeight="32.0" prefWidth="462.0" BorderPane.alignment="CENTER">
 			<children>
-				<Button id="addButton" mnemonicParsing="false" text="Añadir" />
-				<Button id="cancelButton" mnemonicParsing="false" text="Cancelar" />
+				<Button id="addButton" mnemonicParsing="false" onAction="#anadir" text="Añadir" />
+				<Button id="cancelButton" mnemonicParsing="false" onAction="#cancelar" text="Cancelar" />
 			</children>
 			<BorderPane.margin>
 				<Insets bottom="5.0" right="5.0" />
@@ -39,8 +39,8 @@
 						<Insets right="5.0" />
 					</GridPane.margin>
 				</Label>
-				<TextField id="ordenText" GridPane.columnIndex="1" />
-				<TextArea id="descTextArea" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+				<TextField id="ordenText" fx:id="ordenText" GridPane.columnIndex="1" />
+				<TextArea id="descTextArea" fx:id="descripcionText" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
 			</children>
 			<padding>
 				<Insets left="5.0" right="5.0" top="5.0" />
