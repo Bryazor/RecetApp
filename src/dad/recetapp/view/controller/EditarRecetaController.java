@@ -101,12 +101,21 @@ public class EditarRecetaController {
 			@Override
 			public void handle(Event event) {
 				Tab nuevo =new Tab("");
-				tabPane.getTabs().add(tabPane.getTabs().size()-1,nuevo);
+
 				Componente comp = new Componente();
 
 
 				nuevo.setContent(comp);
 
+				nuevo.onSelectionChangedProperty().set( new EventHandler<Event>() {
+
+					@Override
+					public void handle(Event event) {
+						nuevo.setText(comp.getSeccion().getNombre());
+
+					}
+				});
+				tabPane.getTabs().add(tabPane.getTabs().size()-1,nuevo);
 				tabPane.getSelectionModel().select(nuevo);
 
 			}
@@ -202,6 +211,14 @@ public class EditarRecetaController {
 			Tab nuevo =new Tab("");
 			Componente com = new Componente();
 			nuevo.setContent(com);
+			nuevo.onSelectionChangedProperty().set( new EventHandler<Event>() {
+
+				@Override
+				public void handle(Event event) {
+					nuevo.setText(com.getSeccion().getNombre());
+
+				}
+			});
 			tabPane.getTabs().add(0, nuevo);
 		}
 		

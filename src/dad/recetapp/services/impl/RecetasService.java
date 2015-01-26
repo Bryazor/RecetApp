@@ -134,11 +134,6 @@ public class RecetasService implements IRecetasService {
 				}
 			}
 			recetaActual.getSecciones().removeAll(aux);
-			System.out.println("-------2222");
-			for (SeccionItem seccion : recetaActual.getSecciones()) {
-				System.out.println(seccion.getId());
-			}
-			System.out.println("-------2222");
 			
 			
 			for (SeccionItem seccion : recetaActual.getSecciones()) {
@@ -479,29 +474,42 @@ public class RecetasService implements IRecetasService {
 			sentencia.setLong(2, seccion.getId());
 			sentencia.executeUpdate();
 			sentencia.close();
-			
+			List<IngredienteItem> auxIngredientes = new ArrayList<>();
 			// modificar los ingredientes
 			for (IngredienteItem ingrediente : seccion.getIngredientes()) {
 				if (ingrediente.getId() == null) {
 					crearIngrediente(seccion.getId(), ingrediente);
 				} else {
 					modificarIngrediente(ingrediente);
-					seccionActual.getIngredientes().remove(ingrediente);
+					for (IngredienteItem ingredienteitem : seccionActual.getIngredientes()) {
+						if(ingredienteitem.getId()==ingrediente.getId()){
+							auxIngredientes.add(ingredienteitem);
+						}
+					}
+					
 				}
 			}
+			seccionActual.getIngredientes().removeAll(auxIngredientes);
 			for (IngredienteItem ingrediente : seccionActual.getIngredientes()) {
 				eliminarIngrediente(ingrediente);
 			}
 			
+			List<InstruccionItem> auxInstruccion = new ArrayList<>();
 			// modificar las instrucciones
 			for (InstruccionItem instruccion : seccion.getInstrucciones()) {
 				if (instruccion.getId() == null) {
 					crearInstruccion(seccion.getId(), instruccion);
 				} else {
 					modificarInstruccion(instruccion);
-					seccionActual.getInstrucciones().remove(instruccion);
+					for (InstruccionItem instruccionitem : seccionActual.getInstrucciones()) {
+						if(instruccionitem.getId()==instruccion.getId()){
+							auxInstruccion.add(instruccionitem);
+						}
+					}
 				}
 			}
+			
+			seccionActual.getInstrucciones().removeAll(auxInstruccion);
 			for (InstruccionItem instruccion : seccionActual.getInstrucciones()) {
 				eliminarInstruccion(instruccion);
 			}

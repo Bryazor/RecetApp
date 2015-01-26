@@ -99,20 +99,39 @@ public class NuevaRecetaController {
 			minutosThermoCombo.getItems().add(String.valueOf(j));
 		}
 		minutosThermoCombo.setValue("0");
-		
+
 		nuevaTab.setClosable(false);
+
+		seccionTab.onSelectionChangedProperty().set( new EventHandler<Event>() {
+
+			@Override
+			public void handle(Event event) {
+				seccionTab.setText(((Componente)seccionTab.getContent()).getSeccion().getNombre());
+
+			}
+		});
+		
 		
 		nuevaTab.onSelectionChangedProperty().set(new EventHandler<Event>() {
 
 			@Override
 			public void handle(Event event) {
 				Tab nuevo =new Tab("");
-				tabPane.getTabs().add(tabPane.getTabs().size()-1,nuevo);
+
 				Componente comp = new Componente();
-				
 
-					nuevo.setContent(comp);
 
+				nuevo.setContent(comp);
+
+				nuevo.onSelectionChangedProperty().set( new EventHandler<Event>() {
+
+					@Override
+					public void handle(Event event) {
+						nuevo.setText(comp.getSeccion().getNombre());
+
+					}
+				});
+				tabPane.getTabs().add(tabPane.getTabs().size()-1,nuevo);
 				tabPane.getSelectionModel().select(nuevo);
 
 			}
@@ -139,7 +158,7 @@ public class NuevaRecetaController {
 
 			alertError.showAndWait();
 		}else if((!tryParseInt(paraText.getText()))){
-			
+
 			Alert alertError = new Alert(AlertType.ERROR);
 			alertError.setTitle("Error Crear");
 			alertError.setHeaderText("Introduzca el numero de comensales");
@@ -166,32 +185,32 @@ public class NuevaRecetaController {
 			fecha = Calendar.getInstance();
 			receta.setFechaCreacion(fecha.getTime());
 			receta.setPara(paraCombo.getSelectionModel().getSelectedItem());
-			
+
 			System.out.println("OK");
-			
+
 			receta.getSecciones().clear();
 			for (int i = 0; i < tabPane.getTabs().size()-1; i++) {
 				if(!((Componente)tabPane.getTabs().get(i).getContent()).getSeccion().getNombre().equals("")){
 					receta.getSecciones().add(((Componente)tabPane.getTabs().get(i).getContent()).getSeccion());
 					System.out.println(i);
 				}
-				
+
 			}
-			
+
 			borderpane.getScene().getWindow().hide();
 		}
 	}
-	
+
 	boolean tryParseInt(String value)  
 	{  
-	     try  
-	     {  
-	         Integer.parseInt(value);  
-	         return true;  
-	      } catch(NumberFormatException nfe)  
-	      {  
-	          return false;  
-	      }  
+		try  
+		{  
+			Integer.parseInt(value);  
+			return true;  
+		} catch(NumberFormatException nfe)  
+		{  
+			return false;  
+		}  
 	}
 	// Event Listener on Button.onAction
 	@FXML
