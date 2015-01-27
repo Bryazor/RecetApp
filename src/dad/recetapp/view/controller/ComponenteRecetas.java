@@ -34,7 +34,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 
-public class Componente extends BorderPane{
+public class ComponenteRecetas extends BorderPane{
 
 	// lista que contiene los datos
 	private List<IngredienteItem> ingredientes;
@@ -80,9 +80,9 @@ public class Componente extends BorderPane{
 	private Stage ventana;
 	private Tab tab;
 
-	public Componente() {    
+	public ComponenteRecetas() {    
 		super();
-		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/dad/recetapp/view/Componente.fxml"));
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/dad/recetapp/view/ComponenteRecetas.fxml"));
 
 
 		fxmlLoader.setRoot(this); 

@@ -95,7 +95,7 @@ public class NuevaRecetaController {
 
 			@Override
 			public void handle(Event event) {
-				seccionTab.setText(((Componente)seccionTab.getContent()).getSeccion().getNombre());
+				seccionTab.setText(((ComponenteRecetas)seccionTab.getContent()).getSeccion().getNombre());
 
 			}
 		});
@@ -107,7 +107,7 @@ public class NuevaRecetaController {
 			public void handle(Event event) {
 				Tab nuevo =new Tab("");
 
-				Componente comp = new Componente();
+				ComponenteRecetas comp = new ComponenteRecetas();
 
 
 				nuevo.setContent(comp);
@@ -179,8 +179,8 @@ public class NuevaRecetaController {
 
 			receta.getSecciones().clear();
 			for (int i = 0; i < tabPane.getTabs().size()-1; i++) {
-				if(!((Componente)tabPane.getTabs().get(i).getContent()).getSeccion().getNombre().equals("")){
-					receta.getSecciones().add(((Componente)tabPane.getTabs().get(i).getContent()).getSeccion());
+				if(!((ComponenteRecetas)tabPane.getTabs().get(i).getContent()).getSeccion().getNombre().equals("")){
+					receta.getSecciones().add(((ComponenteRecetas)tabPane.getTabs().get(i).getContent()).getSeccion());
 					System.out.println(i);
 				}
 
