@@ -41,16 +41,27 @@
 			<items>
 				<BorderPane>
 					<center>
-						<TableView fx:id="ingredienteTable" prefHeight="164.0" prefWidth="416.0" BorderPane.alignment="CENTER">
-							<columns>
-								<TableColumn fx:id="cantidadColumn" prefWidth="75.0" text="Cantidad" />
-								<TableColumn fx:id="medidaColumn" prefWidth="75.0" text="Medida" />
-								<TableColumn fx:id="tipoColumn" prefWidth="75.0" text="Tipo" />
-							</columns>
-							<columnResizePolicy>
-								<TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-							</columnResizePolicy>
-						</TableView>
+                  <AnchorPane>
+                     <children>
+                        <TitledPane collapsible="false" text="Ingredientes" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <content>
+            						<TableView fx:id="ingredienteTable" prefHeight="164.0" prefWidth="416.0" BorderPane.alignment="CENTER">
+            							<columns>
+            								<TableColumn fx:id="cantidadColumn" prefWidth="75.0" text="Cantidad" />
+            								<TableColumn fx:id="medidaColumn" prefWidth="75.0" text="Medida" />
+            								<TableColumn fx:id="tipoColumn" prefWidth="75.0" text="Tipo" />
+            							</columns>
+            							<columnResizePolicy>
+            								<TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+            							</columnResizePolicy>
+                                 <padding>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </padding>
+            						</TableView>
+                           </content>
+                        </TitledPane>
+                     </children>
+                  </AnchorPane>
 					</center>
 					<bottom>
 						<FlowPane alignment="CENTER_RIGHT" hgap="5.0" vgap="5.0" BorderPane.alignment="CENTER">
@@ -85,15 +96,26 @@
 						</FlowPane>
 					</bottom>
 					<center>
-						<TableView fx:id="instruccionTable" BorderPane.alignment="CENTER">
-							<columnResizePolicy>
-								<TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-							</columnResizePolicy>
-							<columns>
-								<TableColumn fx:id="ordenColumn" prefWidth="75.0" text="Orden" />
-								<TableColumn fx:id="descripcionColumn" prefWidth="75.0" text="Descripcion" />
-							</columns>
-						</TableView>
+                  <AnchorPane>
+                     <children>
+                        <TitledPane collapsible="false" text="Instrucciones" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <content>
+            						<TableView fx:id="instruccionTable" BorderPane.alignment="CENTER">
+            							<columnResizePolicy>
+            								<TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+            							</columnResizePolicy>
+            							<columns>
+            								<TableColumn fx:id="ordenColumn" prefWidth="75.0" text="Orden" />
+            								<TableColumn fx:id="descripcionColumn" prefWidth="75.0" text="Descripcion" />
+            							</columns>
+                                 <padding>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </padding>
+            						</TableView>
+                           </content>
+                        </TitledPane>
+                     </children>
+                  </AnchorPane>
 					</center>
 				</BorderPane>
 			</items>
