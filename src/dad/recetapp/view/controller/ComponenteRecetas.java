@@ -269,8 +269,8 @@ public class ComponenteRecetas extends BorderPane{
 			ventana.initModality(Modality.WINDOW_MODAL);
 			ventana.showAndWait();
 			if(!(((NuevoIngredienteController)loader.getController()).getIngrediente()==null)){
-				IngredienteItem ingrdieneteitem = ((NuevoIngredienteController)loader.getController()).getIngrediente();
-				seccion.getIngredientes().add(ingrdieneteitem);
+				IngredienteItem ingredienteitem = ((NuevoIngredienteController)loader.getController()).getIngrediente();
+				seccion.getIngredientes().add(ingredienteitem);
 				ingredientesList = FXCollections.observableList(seccion.getIngredientes());
 				ingredienteTable.setItems(ingredientesList);
 			}

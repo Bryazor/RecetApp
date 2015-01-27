@@ -470,7 +470,8 @@ public class RecetasController {
 				if((((EditarRecetaController)loader.getController()).isGuardar())){
 					RecetaItem recetaitem = ((EditarRecetaController)loader.getController()).getReceta();
 					try {
-						ServiceLocator.getRecetasService().modificarReceta(recetaitem);
+						ServiceLocator.getRecetasService().eliminarReceta(recetaitem.getId());
+						ServiceLocator.getRecetasService().crearReceta(recetaitem);
 						recetas.clear();
 						filrecetasList.clear();
 						cargarTabla();

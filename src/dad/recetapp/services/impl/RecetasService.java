@@ -1,4 +1,6 @@
 package dad.recetapp.services.impl;
+
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -7,6 +9,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
 import dad.recetapp.db.BaseDatos;
 import dad.recetapp.services.IRecetasService;
 import dad.recetapp.services.ServiceException;
@@ -21,8 +24,11 @@ import dad.recetapp.services.items.SeccionItem;
 import dad.recetapp.services.items.TipoAnotacionItem;
 import dad.recetapp.services.items.TipoIngredienteItem;
 public class RecetasService implements IRecetasService {
+
 	public void crearReceta(RecetaItem receta) throws ServiceException {
+		
 		Connection conn = null;
+		Long id = null;
 		try {
 			conn = BaseDatos.getConnection();
 			conn.setAutoCommit(false);
@@ -37,7 +43,6 @@ public class RecetasService implements IRecetasService {
 			sentencia.setLong(7, receta.getCategoria().getId());
 			sentencia.executeUpdate();
 			ResultSet rs = sentencia.getGeneratedKeys();
-			Long id = null;
 			if (rs.next()) {
 				id = rs.getLong(1);
 			}
@@ -63,6 +68,7 @@ public class RecetasService implements IRecetasService {
 			throw new ServiceException("Error al crear la receta '" + receta.getNombre() + "': " + e.getMessage());
 		}
 	}
+
 	public void modificarReceta(RecetaItem receta) throws ServiceException {
 		Connection conn = null;
 		try {
@@ -91,13 +97,14 @@ public class RecetasService implements IRecetasService {
 			for (AnotacionItem anotacion : recetaActual.getAnotaciones()) {
 				eliminarAnotacion(anotacion);
 			}
+			
 			// crear las secciones
 			for (SeccionItem seccion : receta.getSecciones()) {
 				if (seccion.getId() == null) {
 					crearSeccion(receta.getId(), seccion);
 				} else {
 					modificarSeccion(seccion);
-					recetaActual.getSecciones().remove(seccion);
+					System.out.println(seccion.getId()+" Eliminado : "+recetaActual.getSecciones().remove(seccion));
 				}
 			}
 			for (SeccionItem seccion : recetaActual.getSecciones()) {
@@ -271,7 +278,7 @@ public class RecetasService implements IRecetasService {
 			rs.close();
 			sentencia.close();
 		} catch (SQLException e) {
-			throw new ServiceException("Error al obtener el listado de ingredientes de la sección con ID '" + id + "': " + e.getMessage());
+			throw new ServiceException("Error al obtener el listado de ingredientes de la seccion con ID '" + id + "': " + e.getMessage());
 		}
 		return ingredientes;
 	}
@@ -292,7 +299,7 @@ public class RecetasService implements IRecetasService {
 			rs.close();
 			sentencia.close();
 		} catch (SQLException e) {
-			throw new ServiceException("Error al obtener el listado de instrucciones de la sección con ID '" + id + "': " + e.getMessage());
+			throw new ServiceException("Error al obtener el listado de instrucciones de la seccion con ID '" + id + "': " + e.getMessage());
 		}
 		return instrucciones;
 	}
@@ -318,7 +325,7 @@ public class RecetasService implements IRecetasService {
 			sentencia.executeUpdate();
 			sentencia.close();
 		} catch (SQLException e) {
-			throw new ServiceException("Error al crear la anotación de tipo '" + anotacion.getTipo().getDescripcion() + "': " + e.getMessage());
+			throw new ServiceException("Error al crear la anotacion de tipo '" + anotacion.getTipo().getDescripcion() + "': " + e.getMessage());
 		}
 	}
 	private void crearSeccion(Long idReceta, SeccionItem seccion) throws ServiceException {
@@ -344,7 +351,7 @@ public class RecetasService implements IRecetasService {
 				crearInstruccion(idSeccion, instruccion);
 			}
 		} catch (SQLException e) {
-			throw new ServiceException("Error al crear la sección '" + seccion.getNombre() + "': " + e.getMessage());
+			throw new ServiceException("Error al crear la seccion '" + seccion.getNombre() + "': " + e.getMessage());
 		}
 	}
 	private void crearIngrediente(Long idSeccion, IngredienteItem ingrediente) throws ServiceException {
@@ -371,7 +378,7 @@ public class RecetasService implements IRecetasService {
 			sentencia.executeUpdate();
 			sentencia.close();
 		} catch (SQLException e) {
-			throw new ServiceException("Error al crear la instruccion nº '" + instruccion.getOrden() + "': " + e.getMessage());
+			throw new ServiceException("Error al crear la instruccion numero '" + instruccion.getOrden() + "': " + e.getMessage());
 		}
 	}
 	private void modificarAnotacion(AnotacionItem anotacion) throws ServiceException {
@@ -384,7 +391,7 @@ public class RecetasService implements IRecetasService {
 			sentencia.executeUpdate();
 			sentencia.close();
 		} catch (SQLException e) {
-			throw new ServiceException("Error al actualizar la anotación con ID '" + anotacion.getId() + "': " + e.getMessage());
+			throw new ServiceException("Error al actualizar la anotacion con ID '" + anotacion.getId() + "': " + e.getMessage());
 		}
 	}
 	private void eliminarAnotacion(AnotacionItem anotacion) throws ServiceException {
@@ -432,7 +439,7 @@ public class RecetasService implements IRecetasService {
 				eliminarInstruccion(instruccion);
 			}
 		} catch (SQLException e) {
-			throw new ServiceException("Error al actualizar la sección con ID '" + seccion.getId() + "': " + e.getMessage());
+			throw new ServiceException("Error al actualizar la seccion con ID '" + seccion.getId() + "': " + e.getMessage());
 		}
 	}
 	private SeccionItem obtenerSeccion(Long id) throws ServiceException {
@@ -450,7 +457,7 @@ public class RecetasService implements IRecetasService {
 			rs.close();
 			sentencia.close();
 		} catch (SQLException e) {
-			throw new ServiceException("Error al obtener la sección con ID '" + id + "': " + e.getMessage());
+			throw new ServiceException("Error al obtener la seccion con ID '" + id + "': " + e.getMessage());
 		}
 		return seccion;
 	}
@@ -489,7 +496,7 @@ public class RecetasService implements IRecetasService {
 			sentencia.executeUpdate();
 			sentencia.close();
 		} catch (SQLException e) {
-			throw new ServiceException("Error al actualizar la instrucción con ID '" + instruccion.getId() + "': " + e.getMessage());
+			throw new ServiceException("Error al actualizar la instruccion con ID '" + instruccion.getId() + "': " + e.getMessage());
 		}
 	}
 	private void eliminarInstruccion(InstruccionItem instruccion) throws ServiceException {
@@ -500,7 +507,7 @@ public class RecetasService implements IRecetasService {
 			sentencia.execute();
 			sentencia.close();
 		} catch (SQLException e) {
-			throw new ServiceException("Error al eliminar la instrucción con ID '" + instruccion.getId() + "': " + e.getMessage());
+			throw new ServiceException("Error al eliminar la instruccion con ID '" + instruccion.getId() + "': " + e.getMessage());
 		}
 	}
 	private void eliminarSeccion(SeccionItem seccion) throws ServiceException {
@@ -511,7 +518,7 @@ public class RecetasService implements IRecetasService {
 			sentencia.execute();
 			sentencia.close();
 		} catch (SQLException e) {
-			throw new ServiceException("Error al eliminar la sección con ID '" + seccion.getId() + "': " + e.getMessage());
+			throw new ServiceException("Error al eliminar la seccion con ID '" + seccion.getId() + "': " + e.getMessage());
 		}
 	}
 }

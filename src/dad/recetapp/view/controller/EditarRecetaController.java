@@ -2,6 +2,7 @@ package dad.recetapp.view.controller;
 
 import java.util.Calendar;
 import java.util.List;
+import java.util.Optional;
 
 import dad.recetapp.services.ServiceException;
 import dad.recetapp.services.ServiceLocator;
@@ -167,7 +168,7 @@ public class EditarRecetaController {
 			receta.setPara(paraCombo.getSelectionModel().getSelectedItem());
 			
 			//nuevo
-			receta.getSecciones().clear();
+			receta.getSecciones().removeAll(receta.getSecciones());
 			for (int i = 0; i < tabPane.getTabs().size()-1; i++) {
 				if(!((ComponenteRecetas)tabPane.getTabs().get(i).getContent()).getSeccion().getNombre().equals("")){
 					receta.getSecciones().add(((ComponenteRecetas)tabPane.getTabs().get(i).getContent()).getSeccion());
@@ -176,6 +177,22 @@ public class EditarRecetaController {
 				
 			}
 			guardar=true;
+
+			//TODO quitar esto al terminar de depurar
+			System.out.println("----data dump----");
+			System.out.println("Nombre: " + receta.getNombre());
+			System.out.println("Para " + receta.getCantidad() + " " + receta.getPara());
+			System.out.println("Secciones.len: " + receta.getSecciones().size());
+			receta.getSecciones().forEach(seccionItem -> {
+			System.out.println("{");
+			System.out.println("SeccionItem: " + seccionItem.getNombre());
+			System.out.println("Ingreds.len: " + seccionItem.getIngredientes().size());
+			seccionItem.getIngredientes().forEach(item -> System.out.println(item.getTipo().getNombre() + " " + item.getCantidad()));
+			System.out.println("Instrucc.len: " + seccionItem.getInstrucciones().size());
+			seccionItem.getInstrucciones().forEach(item -> System.out.println(item.getDescripcion()));
+			System.out.println("}");
+			});
+			System.out.println("------------------");
 			borderpane.getScene().getWindow().hide();
 		}
 	}
