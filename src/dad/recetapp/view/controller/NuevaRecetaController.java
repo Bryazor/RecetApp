@@ -1,24 +1,14 @@
 package dad.recetapp.view.controller;
 
-import java.awt.event.ActionListener;
-import java.io.IOException;
 import java.util.Calendar;
 import java.util.List;
-
-import javax.swing.plaf.basic.BasicTabbedPaneUI.TabbedPaneLayout;
 
 import dad.recetapp.services.ServiceException;
 import dad.recetapp.services.ServiceLocator;
 import dad.recetapp.services.items.CategoriaItem;
 import dad.recetapp.services.items.RecetaItem;
-import dad.recetapp.services.items.RecetaListItem;
-import dad.recetapp.view.MainApp;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.control.TextField;
-import javafx.beans.value.ChangeListener;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
@@ -28,7 +18,6 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.BorderPane;
-import javafx.stage.Stage;
 
 public class NuevaRecetaController {
 	@FXML 

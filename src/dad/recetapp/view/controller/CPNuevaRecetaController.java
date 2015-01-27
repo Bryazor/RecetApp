@@ -4,19 +4,12 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
-import com.sun.xml.internal.bind.v2.runtime.output.ForkXmlOutput;
-
-import dad.recetapp.services.ServiceException;
-import dad.recetapp.services.ServiceLocator;
-import dad.recetapp.services.items.CategoriaItem;
 import dad.recetapp.services.items.IngredienteItem;
 import dad.recetapp.services.items.InstruccionItem;
-import dad.recetapp.services.items.RecetaListItem;
 import dad.recetapp.services.items.SeccionItem;
 import dad.recetapp.view.MainApp;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;

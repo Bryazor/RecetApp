@@ -6,7 +6,6 @@ import java.util.Optional;
 
 import dad.recetapp.services.items.IngredienteItem;
 import dad.recetapp.services.items.InstruccionItem;
-import dad.recetapp.services.items.RecetaListItem;
 import dad.recetapp.services.items.SeccionItem;
 import dad.recetapp.view.MainApp;
 import javafx.fxml.FXML;

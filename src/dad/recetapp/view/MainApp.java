@@ -23,6 +23,7 @@ public class MainApp extends Application {
 	public static Timeline timeline;
 	
 	
+	@SuppressWarnings("static-access")
 	@Override
 	public void start(Stage primaryStage) {
 		this.primaryStage = primaryStage;

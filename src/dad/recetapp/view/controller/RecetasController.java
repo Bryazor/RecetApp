@@ -3,16 +3,11 @@ package dad.recetapp.view.controller;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Optional;
 
-import javax.swing.BorderFactory;
-import javax.swing.border.TitledBorder;
-
 import javafx.beans.InvalidationListener;
-import javafx.beans.property.StringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -41,10 +36,8 @@ import javafx.util.Callback;
 import dad.recetapp.services.ServiceException;
 import dad.recetapp.services.ServiceLocator;
 import dad.recetapp.services.items.CategoriaItem;
-import dad.recetapp.services.items.InstruccionItem;
 import dad.recetapp.services.items.RecetaItem;
 import dad.recetapp.services.items.RecetaListItem;
-import dad.recetapp.services.items.TipoAnotacionItem;
 import dad.recetapp.view.MainApp;
 
 public class RecetasController {

@@ -1,6 +1,5 @@
 package dad.recetapp.view.controller;
 
-import java.io.IOException;
 import java.util.Calendar;
 import java.util.List;
 
@@ -9,10 +8,7 @@ import dad.recetapp.services.ServiceLocator;
 import dad.recetapp.services.items.CategoriaItem;
 import dad.recetapp.services.items.RecetaItem;
 import dad.recetapp.services.items.SeccionItem;
-import dad.recetapp.view.MainApp;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.control.TextField;
 import javafx.event.ActionEvent;
 import javafx.event.Event;

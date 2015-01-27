@@ -2,9 +2,7 @@ package dad.recetapp.view.controller;
 
 import dad.recetapp.services.ServiceException;
 import dad.recetapp.services.ServiceLocator;
-import dad.recetapp.services.items.CategoriaItem;
 import dad.recetapp.services.items.IngredienteItem;
-import dad.recetapp.services.items.InstruccionItem;
 import dad.recetapp.services.items.MedidaItem;
 import dad.recetapp.services.items.TipoIngredienteItem;
 import javafx.fxml.FXML;
