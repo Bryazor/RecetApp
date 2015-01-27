@@ -124,6 +124,8 @@ public class ComponenteRecetas extends BorderPane{
 
 	@FXML
 	public void initialize(){
+		seccionText.setText("Sin titulo");
+		
 		nuevoIngredienteButton.setGraphic(new ImageView("dad/recetapp/ui/images/add-icon-20x20.png"));
 		editarIngredienteButton.setGraphic(new ImageView("dad/recetapp/ui/images/edit-icon-20x20.png"));
 		eliminarIngredienteButton.setGraphic(new ImageView("dad/recetapp/ui/images/delete-icon-20x20.png"));

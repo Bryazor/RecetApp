@@ -71,6 +71,7 @@ public class EditarRecetaController {
 		categoriaCombo.setValue("<Seleccione una Categoria>");
 		paraText.setText("0");
 		paraCombo.getItems().add("Personas");
+		paraCombo.getItems().add("Unidades");
 		paraCombo.setValue("Personas");
 		for (int j = 0; j < 61; j++) {
 			segundosTotalCombo.getItems().add(String.valueOf(j));
@@ -204,7 +205,7 @@ public class EditarRecetaController {
 				tabPane.getTabs().add(0, nuevo);
 			}
 		}else{
-			Tab nuevo =new Tab("");
+			Tab nuevo =new Tab("Sin titulo");
 			ComponenteRecetas com = new ComponenteRecetas();
 			nuevo.setContent(com);
 			nuevo.onSelectionChangedProperty().set( new EventHandler<Event>() {

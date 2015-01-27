@@ -70,6 +70,7 @@ public class NuevaRecetaController {
 		categoriaCombo.setValue("<Seleccione una Categoria>");
 		paraText.setText("0");
 		paraCombo.getItems().add("Personas");
+		paraCombo.getItems().add("Unidades");
 		paraCombo.setValue("Personas");
 		for (int j = 0; j < 61; j++) {
 			segundosTotalCombo.getItems().add(String.valueOf(j));
@@ -105,7 +106,7 @@ public class NuevaRecetaController {
 
 			@Override
 			public void handle(Event event) {
-				Tab nuevo =new Tab("");
+				Tab nuevo =new Tab("Sin titulo");
 
 				ComponenteRecetas comp = new ComponenteRecetas();
 
