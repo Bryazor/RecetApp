@@ -2,8 +2,6 @@ package dad.recetapp.view.controller;
 
 import java.util.Calendar;
 import java.util.List;
-import java.util.Optional;
-
 import dad.recetapp.services.ServiceException;
 import dad.recetapp.services.ServiceLocator;
 import dad.recetapp.services.items.CategoriaItem;

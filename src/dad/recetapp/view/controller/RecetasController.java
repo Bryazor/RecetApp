@@ -28,6 +28,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
@@ -49,7 +50,8 @@ public class RecetasController {
 	// lista "observable" que envuelve a la lista "variables" 
 	private ObservableList<RecetaListItem> recetasList;
 	private ObservableList<RecetaListItem> filrecetasList = FXCollections.observableArrayList();
-
+	
+	RecetappFrameMainController controlladorMain;
 	@FXML
 	private TableView<RecetaListItem> recetasTable;
 
@@ -75,7 +77,9 @@ public class RecetasController {
 	@FXML
 	private ComboBox<String> categoriaCombo;
 
-
+	public void setControlladorMain(RecetappFrameMainController controlladorMain) {
+		this.controlladorMain = controlladorMain;
+	}
 	@FXML
 	public void initialize() {
 		try {
@@ -329,69 +333,36 @@ public class RecetasController {
 	/**
 	 * Updates the filteredData to contain all data from the masterData that
 	 * matches the current filter.
+	 * @throws ServiceException 
 	 */
-	private void updateFilteredData() {
+	private void updateFilteredData()  {
 		filrecetasList.clear();
-
-		for (RecetaListItem p : recetasList) {
-			if (matchesFilter(p)) {
-				filrecetasList.add(p);
+		Integer tiempoTotal = (Integer.valueOf(minutosCombo.getValue())*60)+Integer.valueOf(segundosCombo.getValue());
+		if(tiempoTotal==0){
+			tiempoTotal=null;
+		}
+		Long idCategoria = null;
+		if(!categoriaCombo.getValue().equals("<Todas>")){
+			try {
+				for (CategoriaItem categoriaitem : ServiceLocator.getCategoriasService().listarCategorias()) {
+					if(categoriaitem.getDescripcion().equals(categoriaCombo.getValue())){
+						idCategoria = categoriaitem.getId();
+					}
+				}
+			} catch (ServiceException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
+		}
+		try {
+			filrecetasList.addAll(ServiceLocator.getRecetasService().buscarRecetas(nombreText.getText(), tiempoTotal, idCategoria));
+		} catch (ServiceException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 
 		// Must re-sort table after items changed
 		reapplyTableSortOrder();
-	}
-
-	/**
-	 * Returns true if the person matches the current filter. Lower/Upper case
-	 * is ignored.
-	 * 
-	 * @param receta
-	 * @return
-	 */
-	private boolean matchesFilter(RecetaListItem receta) {
-		String filterString = nombreText.getText();
-		if ((filterString == null || filterString.isEmpty()) &&(categoriaCombo.getValue().equals("<Todas>")) && (minutosCombo.getValue().equals("0")) &&(
-				segundosCombo.getValue().equals("0"))) {
-			// No filter --> Add all.
-			return true;
-		}
-
-		String lowerCaseFilterString = filterString.toLowerCase();
-		if(!(filterString == null || filterString.isEmpty())){
-			if (receta.getNombre().toLowerCase().indexOf(lowerCaseFilterString) != -1) {
-				return true;
-			} 
-		}
-		if(!(categoriaCombo.getValue().equals("<Todas>"))){
-			if (receta.getCategoria().equals(categoriaCombo.getValue())) {
-				return true;
-			} 
-		}
-		if(!(minutosCombo.getValue().equals("0"))){
-			if(!(segundosCombo.getValue().equals("0"))){
-				if(receta.getTiempoTotal() < ((Integer.valueOf(minutosCombo.getValue())*60)+Integer.valueOf(segundosCombo.getValue()))){
-					return true;
-					
-				}
-			}else{
-				System.out.println("dentro else");
-
-				if(receta.getTiempoTotal()<= ((Integer.valueOf(minutosCombo.getValue())*60))){
-
-					return true;
-				}
-			}
-		}
-		if(!(segundosCombo.getValue().equals("0"))){
-			if(receta.getTiempoTotal() <= (Integer.valueOf(segundosCombo.getValue()))){
-				return true;
-			}
-		}
-
-
-		return false; // Does not match
 	}
 
 	private void reapplyTableSortOrder() {
@@ -409,6 +380,7 @@ public class RecetasController {
 			ventanaDos = (BorderPane) loader.load();
 			ventana = new Stage();
 			ventana.setTitle("Nueva Receta");
+			ventana.getIcons().add(new Image("/dad/recetapp/ui/images/logo.png"));
 			Scene scene = new Scene(ventanaDos);
 			ventana.setScene(scene);
 
@@ -422,6 +394,9 @@ public class RecetasController {
 					recetas.clear();
 					filrecetasList.clear();
 					cargarTabla();
+//					FXMLLoader loader2 = new FXMLLoader(RecetasController.class.getResource("/dad/recetapp/view/RecetappFrameMain.fxml"));
+//					((RecetappFrameMainController)loader2.getController()).numeroRecetas();
+					updateFilteredData() ;
 				} catch (ServiceException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -462,6 +437,7 @@ public class RecetasController {
 
 				ventana = new Stage();
 				ventana.setTitle("Editar Receta");
+				ventana.getIcons().add(new Image("/dad/recetapp/ui/images/logo.png"));
 				Scene scene = new Scene(ventanaDos);
 				ventana.setScene(scene);
 				ventana.initOwner(MainApp.primaryStage);
@@ -475,6 +451,7 @@ public class RecetasController {
 						recetas.clear();
 						filrecetasList.clear();
 						cargarTabla();
+						updateFilteredData() ;
 					} catch (ServiceException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -514,7 +491,7 @@ public class RecetasController {
 						ServiceLocator.getRecetasService().eliminarReceta(recetalistitem.getId());
 						recetasList.remove(recetalistitem);
 					}
-
+					//
 				} catch (ServiceException e) {
 					Alert alertError = new Alert(AlertType.ERROR);
 					alertError.setTitle("Error Eliminar");
@@ -527,5 +504,6 @@ public class RecetasController {
 		}
 
 	}
+	
 
 }

@@ -4,13 +4,17 @@ import dad.recetapp.services.ServiceException;
 import dad.recetapp.services.ServiceLocator;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tab;
 import javafx.scene.layout.BorderPane;
 
 public class RecetappFrameMainController {
 	@FXML
-	private Label recetalabel;
+	public Label recetalabel = new Label("asdasdas");
 	@FXML
 	private BorderPane mainframe;
+	@FXML
+	private Tab recetasTab;
+	
 	@FXML
 	public void initialize() {
 		numeroRecetas();

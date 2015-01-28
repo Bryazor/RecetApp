@@ -94,14 +94,14 @@ public class EditarIngredienteController {
 			alertError.setContentText("Por favor, introduzca la cantidad");
 
 			alertError.showAndWait();
-		}else if(medidaCombo.getValue().equals("")){
+		}else if(medidaCombo.getValue().equals("<Seleccione una la medida>")){
 			Alert alertError = new Alert(AlertType.ERROR);
 			alertError.setTitle("Error Crear");
 			alertError.setHeaderText("Seleccione una medida");
 			alertError.setContentText("Por favor, seleccione una medida");
 
 			alertError.showAndWait();
-		}else if(tipoCombo.getValue().equals("")){
+		}else if(tipoCombo.getValue().equals("<Seleccione el tipo de ingrediente>")){
 			Alert alertError = new Alert(AlertType.ERROR);
 			alertError.setTitle("Error Crear");
 			alertError.setHeaderText("Seleccione un ingrediente");

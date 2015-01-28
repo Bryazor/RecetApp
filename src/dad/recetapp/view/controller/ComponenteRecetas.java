@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
-import dad.recetapp.MainApp;
 import dad.recetapp.services.items.IngredienteItem;
 import dad.recetapp.services.items.InstruccionItem;
 import dad.recetapp.services.items.SeccionItem;
@@ -28,6 +27,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
@@ -134,15 +134,11 @@ public class ComponenteRecetas extends BorderPane{
 		editarInstruccionButton.setGraphic(new ImageView("dad/recetapp/ui/images/edit-icon-20x20.png"));
 		eliminarInstruccionButton.setGraphic(new ImageView("dad/recetapp/ui/images/delete-icon-20x20.png"));
 
+		
+		//TABLA INSTRUCCIONES
 		cantidadColumn.setCellValueFactory(new PropertyValueFactory<IngredienteItem, Integer>("cantidad"));
-
-
-	//	medidaColumn.setCellValueFactory(new PropertyValueFactory<IngredienteItem, String>("medida"));
-	//	medidaColumn.setCellFactory(TextFieldTableCell.<IngredienteItem>forTableColumn());
-
+		
 		ordenColumn.setCellValueFactory(new PropertyValueFactory<InstruccionItem, Integer>("orden"));
-
-
 
 		descripcionColumn.setCellValueFactory(new PropertyValueFactory<InstruccionItem, String>("descripcion"));
 		descripcionColumn.setCellFactory(TextFieldTableCell.<InstruccionItem>forTableColumn());
@@ -261,7 +257,8 @@ public class ComponenteRecetas extends BorderPane{
 			BorderPane ventanaDos;
 			ventanaDos = (BorderPane) loader.load();
 			ventana = new Stage();
-			ventana.setTitle("Nuevo Ingrediente");
+			ventana.setTitle("Nuevo Ingrediente para '"+seccion.getNombre()+"'");
+			ventana.getIcons().add(new Image("/dad/recetapp/ui/images/logo.png"));
 			Scene scene = new Scene(ventanaDos);
 			ventana.setScene(scene);
 
@@ -298,7 +295,8 @@ public class ComponenteRecetas extends BorderPane{
 				BorderPane ventanaDos;
 				ventanaDos = (BorderPane) loader.load();
 				ventana = new Stage();
-				ventana.setTitle("Editar Ingrediente");
+				ventana.setTitle("Editar Ingrediente para '"+seccion.getNombre()+"'");
+				ventana.getIcons().add(new Image("/dad/recetapp/ui/images/logo.png"));
 				Scene scene = new Scene(ventanaDos);
 				ventana.setScene(scene);
 
@@ -355,7 +353,8 @@ public class ComponenteRecetas extends BorderPane{
 			BorderPane ventanaDos;
 			ventanaDos = (BorderPane) loader.load();
 			ventana = new Stage();
-			ventana.setTitle("Nueva Instruccion");
+			ventana.setTitle("Nueva Instruccion para '"+seccion.getNombre()+"'");
+			ventana.getIcons().add(new Image("/dad/recetapp/ui/images/logo.png"));
 			Scene scene = new Scene(ventanaDos);
 			ventana.setScene(scene);
 
@@ -392,7 +391,8 @@ public class ComponenteRecetas extends BorderPane{
 				BorderPane ventanaDos;
 				ventanaDos = (BorderPane) loader.load();
 				ventana = new Stage();
-				ventana.setTitle("Editar Instruccion");
+				ventana.setTitle("Editar Instruccion para '"+seccion.getNombre()+"'");
+				ventana.getIcons().add(new Image("/dad/recetapp/ui/images/logo.png"));
 				Scene scene = new Scene(ventanaDos);
 				ventana.setScene(scene);
 
