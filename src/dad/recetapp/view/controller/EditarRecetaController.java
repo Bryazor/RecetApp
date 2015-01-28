@@ -178,21 +178,7 @@ public class EditarRecetaController {
 			}
 			guardar=true;
 
-			//TODO quitar esto al terminar de depurar
-			System.out.println("----data dump----");
-			System.out.println("Nombre: " + receta.getNombre());
-			System.out.println("Para " + receta.getCantidad() + " " + receta.getPara());
-			System.out.println("Secciones.len: " + receta.getSecciones().size());
-			receta.getSecciones().forEach(seccionItem -> {
-			System.out.println("{");
-			System.out.println("SeccionItem: " + seccionItem.getNombre());
-			System.out.println("Ingreds.len: " + seccionItem.getIngredientes().size());
-			seccionItem.getIngredientes().forEach(item -> System.out.println(item.getTipo().getNombre() + " " + item.getCantidad()));
-			System.out.println("Instrucc.len: " + seccionItem.getInstrucciones().size());
-			seccionItem.getInstrucciones().forEach(item -> System.out.println(item.getDescripcion()));
-			System.out.println("}");
-			});
-			System.out.println("------------------");
+
 			borderpane.getScene().getWindow().hide();
 		}
 	}

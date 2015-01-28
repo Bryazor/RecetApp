@@ -1,6 +1,6 @@
 package dad.recetapp.view.controller;
 
-import dad.recetapp.view.MainApp;
+import dad.recetapp.MainApp;
 import javafx.fxml.FXML;
 import javafx.util.Duration;
 

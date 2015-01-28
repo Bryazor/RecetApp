@@ -33,12 +33,12 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Callback;
+import dad.recetapp.MainApp;
 import dad.recetapp.services.ServiceException;
 import dad.recetapp.services.ServiceLocator;
 import dad.recetapp.services.items.CategoriaItem;
 import dad.recetapp.services.items.RecetaItem;
 import dad.recetapp.services.items.RecetaListItem;
-import dad.recetapp.view.MainApp;
 
 public class RecetasController {
 	@FXML
@@ -404,7 +404,7 @@ public class RecetasController {
 	public void anadir() {
 
 		try {
-			FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("NuevaRecetaView.fxml"));
+			FXMLLoader loader = new FXMLLoader(RecetasController.class.getResource("/dad/recetapp/view/NuevaRecetaView.fxml"));
 			BorderPane ventanaDos;
 			ventanaDos = (BorderPane) loader.load();
 			ventana = new Stage();
@@ -449,7 +449,7 @@ public class RecetasController {
 			alertError.showAndWait();
 		}else{
 			try {
-				FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("EditarRecetaView.fxml"));
+				FXMLLoader loader = new FXMLLoader(RecetasController.class.getResource("/dad/recetapp/view/EditarRecetaView.fxml"));
 				BorderPane ventanaDos;
 				ventanaDos = (BorderPane) loader.load();
 				try {

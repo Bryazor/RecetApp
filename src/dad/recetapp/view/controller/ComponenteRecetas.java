@@ -4,10 +4,10 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
+import dad.recetapp.MainApp;
 import dad.recetapp.services.items.IngredienteItem;
 import dad.recetapp.services.items.InstruccionItem;
 import dad.recetapp.services.items.SeccionItem;
-import dad.recetapp.view.MainApp;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -257,7 +257,7 @@ public class ComponenteRecetas extends BorderPane{
 	@FXML
 	public void nuevoIngrediente(ActionEvent event) {
 		try {
-			FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("NuevoIngredienteView.fxml"));
+			FXMLLoader loader = new FXMLLoader(ComponenteRecetas.class.getResource("/dad/recetapp/view/NuevoIngredienteView.fxml"));
 			BorderPane ventanaDos;
 			ventanaDos = (BorderPane) loader.load();
 			ventana = new Stage();
@@ -294,7 +294,7 @@ public class ComponenteRecetas extends BorderPane{
 		}else{
 
 			try {
-				FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("EditarIngredienteView.fxml"));
+				FXMLLoader loader = new FXMLLoader(ComponenteRecetas.class.getResource("/dad/recetapp/view/EditarIngredienteView.fxml"));
 				BorderPane ventanaDos;
 				ventanaDos = (BorderPane) loader.load();
 				ventana = new Stage();
@@ -351,7 +351,7 @@ public class ComponenteRecetas extends BorderPane{
 	@FXML
 	public void nuevaInstruccion(ActionEvent event) {
 		try {
-			FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("NuevaInstruccionView.fxml"));
+			FXMLLoader loader = new FXMLLoader(ComponenteRecetas.class.getResource("/dad/recetapp/view/NuevaInstruccionView.fxml"));
 			BorderPane ventanaDos;
 			ventanaDos = (BorderPane) loader.load();
 			ventana = new Stage();
@@ -388,7 +388,7 @@ public class ComponenteRecetas extends BorderPane{
 		}else{
 
 			try {
-				FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("EditarInstruccionView.fxml"));
+				FXMLLoader loader = new FXMLLoader(ComponenteRecetas.class.getResource("/dad/recetapp/view/EditarInstruccionView.fxml"));
 				BorderPane ventanaDos;
 				ventanaDos = (BorderPane) loader.load();
 				ventana = new Stage();

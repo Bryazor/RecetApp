@@ -1,4 +1,4 @@
-package dad.recetapp.view;
+package dad.recetapp;
 
 import java.io.IOException;
 
@@ -51,7 +51,7 @@ public class MainApp extends Application {
 	private void initLogoView() {
 		try {
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(MainApp.class.getResource("IniciandoView.fxml"));
+			loader.setLocation(MainApp.class.getResource("/dad/recetapp/view/IniciandoView.fxml"));
 			BorderPane initView = (BorderPane) loader.load();
 			initStage = new Stage();
 			initStage.initStyle(StageStyle.UNDECORATED);
@@ -70,7 +70,7 @@ public class MainApp extends Application {
 		try {
 			// Load root layout from fxml file.
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(MainApp.class.getResource("MainStage.fxml"));
+			loader.setLocation(MainApp.class.getResource("/dad/recetapp/view/MainStage.fxml"));
 			rootLayout = (BorderPane) loader.load();
 
 			// Show the scene containing the root layout.
@@ -89,7 +89,7 @@ public class MainApp extends Application {
 		try {
 			// Load person overview.
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(MainApp.class.getResource("RecetappFrameMain.fxml"));
+			loader.setLocation(MainApp.class.getResource("/dad/recetapp/view/RecetappFrameMain.fxml"));
 			BorderPane personOverview = (BorderPane) loader.load();
 
 			// Set person overview into the center of root layout.
