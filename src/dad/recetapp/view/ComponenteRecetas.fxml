@@ -25,11 +25,7 @@
 					</font>
 				</Label>
 				<TextField fx:id="seccionText" GridPane.columnIndex="1" />
-				<FlowPane alignment="CENTER_RIGHT" columnHalignment="RIGHT" GridPane.columnIndex="2">
-					<children>
-						<Button fx:id="menosButton" mnemonicParsing="false" onAction="#menos" prefHeight="25.0" prefWidth="42.0" text="-" />
-					</children>
-				</FlowPane>
+				<FlowPane alignment="CENTER_RIGHT" columnHalignment="RIGHT" GridPane.columnIndex="2" />
 			</children>
 			<BorderPane.margin>
 				<Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />

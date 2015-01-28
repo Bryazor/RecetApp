@@ -53,8 +53,7 @@ public class IngredientesController {
 				try {
 					ServiceLocator.getTiposIngredientesService().modificarTipoIngrediente(editado);
 				} catch (ServiceException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					error(e.getMessage());
 				}
 			}
 		});
@@ -68,7 +67,7 @@ public class IngredientesController {
 			ingredientes = ServiceLocator.getTiposIngredientesService().listarTipoIngredientes();
 			ingredientesList = FXCollections.observableList(ingredientes);
 		} catch (ServiceException e) {
-			e.printStackTrace();
+			error(e.getMessage());
 		}
 
 		ingredientesTable.setItems(ingredientesList);
@@ -96,8 +95,7 @@ public class IngredientesController {
 				ingredientes.clear();
 				cargarTabla();
 			} catch (ServiceException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				error(e.getMessage());
 			}
 			// vaciamos los cuadros de texto
 			nombreText.clear(); // los mismo que setText("")
@@ -139,5 +137,13 @@ public class IngredientesController {
 			}
 		}
 
+	}
+	public void error(String mensaje){
+		Alert alertError = new Alert(AlertType.ERROR);
+		alertError.setTitle("Error");
+		alertError.setHeaderText("Error ");
+		alertError.setContentText("Se ha producido un error: "+ mensaje);
+
+		alertError.showAndWait();
 	}
 }

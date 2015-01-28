@@ -104,7 +104,7 @@ public class RecetasService implements IRecetasService {
 					crearSeccion(receta.getId(), seccion);
 				} else {
 					modificarSeccion(seccion);
-					System.out.println(seccion.getId()+" Eliminado : "+recetaActual.getSecciones().remove(seccion));
+					recetaActual.getSecciones().remove(seccion);
 				}
 			}
 			for (SeccionItem seccion : recetaActual.getSecciones()) {

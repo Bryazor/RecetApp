@@ -42,7 +42,6 @@ public class MedidasController {
 
 	@FXML
 	public void initialize() {
-		System.out.println("cargando");
 		medidasTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 		cargarTabla();
 
@@ -57,12 +56,11 @@ public class MedidasController {
 				try {
 					ServiceLocator.getMedidasService().modificarMedida(editado);
 				} catch (ServiceException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					error(e.getMessage());
 				}
 			}
 		});
-		
+
 		abreviaturaColumn.setCellValueFactory(new PropertyValueFactory<MedidaItem, String>("abreviatura"));
 		abreviaturaColumn.setCellFactory(TextFieldTableCell.<MedidaItem>forTableColumn());
 		abreviaturaColumn.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<MedidaItem,String>>() {
@@ -74,8 +72,7 @@ public class MedidasController {
 				try {
 					ServiceLocator.getMedidasService().modificarMedida(editado);
 				} catch (ServiceException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					error(e.getMessage());
 				}
 			}
 		});
@@ -89,7 +86,7 @@ public class MedidasController {
 			medidas = ServiceLocator.getMedidasService().listarMedidas();
 			medidasList = FXCollections.observableList(medidas);
 		} catch (ServiceException e) {
-			e.printStackTrace();
+			error(e.getMessage());
 		}
 
 		medidasTable.setItems(medidasList);
@@ -118,8 +115,7 @@ public class MedidasController {
 				medidas.clear();
 				cargarTabla();
 			} catch (ServiceException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				error(e.getMessage());
 			}
 			// vaciamos los cuadros de texto
 			nombreText.clear(); // los mismo que setText("")
@@ -162,5 +158,14 @@ public class MedidasController {
 			}
 		}
 
+	}
+
+	public void error(String mensaje){
+		Alert alertError = new Alert(AlertType.ERROR);
+		alertError.setTitle("Error");
+		alertError.setHeaderText("Error ");
+		alertError.setContentText("Se ha producido un error: "+ mensaje);
+
+		alertError.showAndWait();
 	}
 }

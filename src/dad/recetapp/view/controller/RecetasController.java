@@ -20,6 +20,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -31,6 +32,7 @@ import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Callback;
@@ -88,8 +90,7 @@ public class RecetasController {
 				categoriaCombo.getItems().add(categoriaItem.getDescripcion());
 			}
 		} catch (ServiceException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			error(e.getMessage());
 		}
 		categoriaCombo.setValue("<Todas>");
 		for (int j = 0; j < 61; j++) {
@@ -322,7 +323,7 @@ public class RecetasController {
 			});
 
 		} catch (ServiceException e) {
-			e.printStackTrace();
+			error(e.getMessage());
 		}
 
 		recetasTable.setItems(filrecetasList);
@@ -350,15 +351,13 @@ public class RecetasController {
 					}
 				}
 			} catch (ServiceException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				error(e.getMessage());
 			}
 		}
 		try {
 			filrecetasList.addAll(ServiceLocator.getRecetasService().buscarRecetas(nombreText.getText(), tiempoTotal, idCategoria));
 		} catch (ServiceException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			error(e.getMessage());
 		}
 
 		// Must re-sort table after items changed
@@ -394,17 +393,14 @@ public class RecetasController {
 					recetas.clear();
 					filrecetasList.clear();
 					cargarTabla();
-//					FXMLLoader loader2 = new FXMLLoader(RecetasController.class.getResource("/dad/recetapp/view/RecetappFrameMain.fxml"));
-//					((RecetappFrameMainController)loader2.getController()).numeroRecetas();
+					controlladorMain.numeroRecetas();
 					updateFilteredData() ;
 				} catch (ServiceException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					error(e.getMessage());
 				}
 			}
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			error(e.getMessage());
 		}
 
 
@@ -422,6 +418,13 @@ public class RecetasController {
 			alertError.setContentText("Por favor, seleccione una receta a editar");
 
 			alertError.showAndWait();
+		}else if(recetasTable.getSelectionModel().getSelectedItems().size()>1){
+			Alert alertError = new Alert(AlertType.ERROR);
+			alertError.setTitle("Error Editar");
+			alertError.setHeaderText("Seleccionar Fila");
+			alertError.setContentText("Por favor, seleccione solo una receta a editar");
+
+			alertError.showAndWait();
 		}else{
 			try {
 				FXMLLoader loader = new FXMLLoader(RecetasController.class.getResource("/dad/recetapp/view/EditarRecetaView.fxml"));
@@ -431,8 +434,7 @@ public class RecetasController {
 					((EditarRecetaController) loader.getController()).setReceta(ServiceLocator.getRecetasService().obtenerReceta(
 							recetasTable.getSelectionModel().getSelectedItem().getId()));
 				} catch (ServiceException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					error(e.getMessage());
 				}
 
 				ventana = new Stage();
@@ -453,13 +455,11 @@ public class RecetasController {
 						cargarTabla();
 						updateFilteredData() ;
 					} catch (ServiceException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
+						error(e.getMessage());
 					}
 				}
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				error(e.getMessage());
 			}
 		}
 
@@ -489,9 +489,12 @@ public class RecetasController {
 				try {
 					for (RecetaListItem recetalistitem : recetasTable.getSelectionModel().getSelectedItems()) {
 						ServiceLocator.getRecetasService().eliminarReceta(recetalistitem.getId());
-						recetasList.remove(recetalistitem);
 					}
-					//
+					recetas.clear();
+					filrecetasList.clear();
+					cargarTabla();
+					updateFilteredData() ;
+					controlladorMain.numeroRecetas();
 				} catch (ServiceException e) {
 					Alert alertError = new Alert(AlertType.ERROR);
 					alertError.setTitle("Error Eliminar");
@@ -504,6 +507,14 @@ public class RecetasController {
 		}
 
 	}
-	
+	public void error(String mensaje){
+		Alert alertError = new Alert(AlertType.ERROR);
+		alertError.setTitle("Error");
+		alertError.setHeaderText("Error ");
+		alertError.setContentText("Se ha producido un error: "+ mensaje);
 
+		alertError.showAndWait();
+	}
+
+	
 }

@@ -2,6 +2,7 @@ package dad.recetapp.view.controller;
 
 import java.util.Calendar;
 import java.util.List;
+
 import dad.recetapp.services.ServiceException;
 import dad.recetapp.services.ServiceLocator;
 import dad.recetapp.services.items.CategoriaItem;
@@ -63,8 +64,7 @@ public class EditarRecetaController {
 				categoriaCombo.getItems().add(categoriaItem.getDescripcion());
 			}
 		} catch (ServiceException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			error(e.getMessage());
 		}
 
 		categoriaCombo.setValue("<Seleccione una Categoria>");
@@ -164,15 +164,14 @@ public class EditarRecetaController {
 			fecha = Calendar.getInstance();
 			receta.setFechaCreacion(fecha.getTime());
 			receta.setPara(paraCombo.getSelectionModel().getSelectedItem());
-			
+
 			//nuevo
 			receta.getSecciones().removeAll(receta.getSecciones());
 			for (int i = 0; i < tabPane.getTabs().size()-1; i++) {
 				if(!((ComponenteRecetas)tabPane.getTabs().get(i).getContent()).getSeccion().getNombre().equals("")){
 					receta.getSecciones().add(((ComponenteRecetas)tabPane.getTabs().get(i).getContent()).getSeccion());
-					System.out.println(i);
 				}
-				
+
 			}
 			guardar=true;
 
@@ -198,7 +197,6 @@ public class EditarRecetaController {
 		List<SeccionItem> secciones =receta.getSecciones();
 		if(secciones.size()>0){
 			for (SeccionItem seccionItem : secciones) {
-				System.out.println(seccionItem.getNombre());
 				Tab nuevo =new Tab(seccionItem.getNombre());
 				ComponenteRecetas com = new ComponenteRecetas();
 				com.setSeccion(seccionItem);
@@ -219,7 +217,7 @@ public class EditarRecetaController {
 			});
 			tabPane.getTabs().add(0, nuevo);
 		}
-		
+
 		tabPane.getSelectionModel().select(0);
 	}
 
@@ -243,5 +241,12 @@ public class EditarRecetaController {
 		RecetasController.ventana.close();
 	}
 
+	public void error(String mensaje){
+		Alert alertError = new Alert(AlertType.ERROR);
+		alertError.setTitle("Error");
+		alertError.setHeaderText("Error ");
+		alertError.setContentText("Se ha producido un error: "+ mensaje);
 
+		alertError.showAndWait();
+	}
 }

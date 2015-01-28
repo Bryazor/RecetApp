@@ -8,7 +8,7 @@
 <?import dad.recetapp.view.controller.* ?>
 <?scenebuilder-classpath-element ../../../../../../../target/MyJavaFX.jar?>
 
-<BorderPane fx:id="borderpane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dad.recetapp.view.controller.NuevaRecetaController">
+<BorderPane fx:id="borderpane" prefHeight="500.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dad.recetapp.view.controller.NuevaRecetaController">
 	<bottom>
 		<FlowPane alignment="BOTTOM_RIGHT" columnHalignment="RIGHT" hgap="10.0" prefHeight="32.0" prefWidth="495.0" BorderPane.alignment="CENTER">
 			<children>

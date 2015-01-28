@@ -40,8 +40,7 @@ public class NuevoIngredienteController {
 				medidaCombo.getItems().add(medidaitem.getNombre());
 			}
 		} catch (ServiceException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			error(e.getMessage());
 		}
 		medidaCombo.setValue("<Seleccione una la medida>");
 
@@ -51,8 +50,7 @@ public class NuevoIngredienteController {
 				tipoCombo.getItems().add(tipoingredienteitem.getNombre());
 			}
 		} catch (ServiceException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			error(e.getMessage());
 		}
 		tipoCombo.setValue("<Seleccione el tipo de ingrediente>");
 
@@ -126,15 +124,23 @@ public class NuevoIngredienteController {
 					}
 				}
 			} catch (ServiceException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				error(e.getMessage());
 			}
-			borderpane.getScene().getWindow().hide();
-			}
-		}
-		// Event Listener on Button.onAction
-		@FXML
-		public void cancelar(ActionEvent event) {
 			borderpane.getScene().getWindow().hide();
 		}
 	}
+	// Event Listener on Button.onAction
+	@FXML
+	public void cancelar(ActionEvent event) {
+		borderpane.getScene().getWindow().hide();
+	}
+
+	public void error(String mensaje){
+		Alert alertError = new Alert(AlertType.ERROR);
+		alertError.setTitle("Error");
+		alertError.setHeaderText("Error ");
+		alertError.setContentText("Se ha producido un error: "+ mensaje);
+
+		alertError.showAndWait();
+	}
+}

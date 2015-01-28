@@ -41,7 +41,7 @@
    <bottom>
       <Pane>
          <children>
-            <Label fx:id="recetalabel" alignment="BOTTOM_LEFT" text="Recetas 0" BorderPane.alignment="CENTER_LEFT" />
+            <Label fx:id="recetalabel" alignment="BOTTOM_LEFT" BorderPane.alignment="CENTER_LEFT" />
          </children>
          <BorderPane.margin>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />

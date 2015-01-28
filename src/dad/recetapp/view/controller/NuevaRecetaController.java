@@ -63,8 +63,7 @@ public class NuevaRecetaController {
 				categoriaCombo.getItems().add(categoriaItem.getDescripcion());
 			}
 		} catch (ServiceException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			error(e.getMessage());
 		}
 
 		categoriaCombo.setValue("<Seleccione una Categoria>");
@@ -100,8 +99,8 @@ public class NuevaRecetaController {
 
 			}
 		});
-		
-		
+
+
 		nuevaTab.onSelectionChangedProperty().set(new EventHandler<Event>() {
 
 			@Override
@@ -176,13 +175,11 @@ public class NuevaRecetaController {
 			receta.setFechaCreacion(fecha.getTime());
 			receta.setPara(paraCombo.getSelectionModel().getSelectedItem());
 
-			System.out.println("OK");
 
 			receta.getSecciones().clear();
 			for (int i = 0; i < tabPane.getTabs().size()-1; i++) {
 				if(!((ComponenteRecetas)tabPane.getTabs().get(i).getContent()).getSeccion().getNombre().equals("")){
 					receta.getSecciones().add(((ComponenteRecetas)tabPane.getTabs().get(i).getContent()).getSeccion());
-					System.out.println(i);
 				}
 
 			}
@@ -209,5 +206,13 @@ public class NuevaRecetaController {
 		borderpane.getScene().getWindow().hide();
 	}
 
+	public void error(String mensaje){
+		Alert alertError = new Alert(AlertType.ERROR);
+		alertError.setTitle("Error");
+		alertError.setHeaderText("Error ");
+		alertError.setContentText("Se ha producido un error: "+ mensaje);
+
+		alertError.showAndWait();
+	}
 
 }

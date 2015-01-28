@@ -40,7 +40,7 @@
 					</GridPane.margin>
 				</Label>
 				<TextField id="ordenText" fx:id="ordenText" GridPane.columnIndex="1" />
-				<TextArea id="descTextArea" fx:id="descripcionText" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+				<TextArea id="descTextArea" fx:id="descripcionText" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
 			</children>
 			<padding>
 				<Insets left="5.0" right="5.0" top="5.0" />

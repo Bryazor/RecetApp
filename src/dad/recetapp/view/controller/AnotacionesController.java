@@ -53,8 +53,7 @@ public class AnotacionesController {
 				try {
 					ServiceLocator.getTiposAnotacionesService().modificarTipoAnotacion(editado);
 				} catch (ServiceException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					error(e.getMessage());
 				}
 			}
 		});
@@ -68,7 +67,7 @@ public class AnotacionesController {
 			anotaciones = ServiceLocator.getTiposAnotacionesService().listarTipoAnotaciones();
 			anotacionesList = FXCollections.observableList(anotaciones);
 		} catch (ServiceException e) {
-			e.printStackTrace();
+			error(e.getMessage());
 		}
 
 		anotacionesTable.setItems(anotacionesList);
@@ -78,7 +77,6 @@ public class AnotacionesController {
 
 	@FXML
 	public void anadir() {
-		// creamos un objeto "variable"
 		TipoAnotacionItem anotacion = new TipoAnotacionItem();
 		if(descripcionText.getText().equals("")){
 			Alert alertError = new Alert(AlertType.ERROR);
@@ -89,18 +87,15 @@ public class AnotacionesController {
 			alertError.showAndWait();
 		}else{
 			anotacion.setDescripcion(descripcionText.getText());
-			// si modificamos la lista "observable", se añade el item a la lista original
-			// y además la tabla se entera automáticamente (porque la tabla está observando a la lista)
 			try {
 				ServiceLocator.getTiposAnotacionesService().crearTipoAnotacion(anotacion);
 				anotaciones.clear();
 				cargarTabla();
 			} catch (ServiceException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				error(e.getMessage());
 			}
-			// vaciamos los cuadros de texto
-			descripcionText.clear(); // los mismo que setText("")
+			
+			descripcionText.clear();
 		}
 
 	}
@@ -139,5 +134,14 @@ public class AnotacionesController {
 			}
 		}
 
+	}
+
+	public void error(String mensaje){
+		Alert alertError = new Alert(AlertType.ERROR);
+		alertError.setTitle("Error");
+		alertError.setHeaderText("Error ");
+		alertError.setContentText("Se ha producido un error: "+ mensaje);
+
+		alertError.showAndWait();
 	}
 }
