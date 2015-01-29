@@ -11,7 +11,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
 
 public class RecetappFrameMainController {
