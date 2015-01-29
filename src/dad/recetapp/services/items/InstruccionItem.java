@@ -28,4 +28,13 @@ public class InstruccionItem {
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
+
+	@Override
+	public boolean equals(Object obj){
+		if (obj instanceof InstruccionItem){
+			InstruccionItem instruccion = (InstruccionItem) obj;
+			return instruccion.getId() == this.id;
+		}
+		return false;		
+	}
 }

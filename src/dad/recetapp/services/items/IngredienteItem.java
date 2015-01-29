@@ -2,8 +2,6 @@ package dad.recetapp.services.items;
 
 public class IngredienteItem {
 	
-
-
 	private Long id;
 	private Integer cantidad;
 	private MedidaItem medida;
@@ -41,4 +39,12 @@ public class IngredienteItem {
 		this.tipo = tipo;
 	}
 
+//	@Override
+//	public boolean equals(Object obj){
+//		if (obj instanceof IngredienteItem){			
+//			IngredienteItem ingrediente = (IngredienteItem) obj;
+//			return ingrediente.getId() == this.id;
+//		}
+//		return false;		
+//	}
 }

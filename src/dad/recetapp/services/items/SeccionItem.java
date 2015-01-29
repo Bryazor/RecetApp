@@ -27,11 +27,27 @@ public class SeccionItem {
 	}
 
 	public List<IngredienteItem> getIngredientes() {
+		if(ingredientes == null)
+			ingredientes = new ArrayList<IngredienteItem>();
 		return ingredientes;
 	}
 
 	public List<InstruccionItem> getInstrucciones() {
+		if(instrucciones == null)
+			instrucciones = new ArrayList<InstruccionItem>();
 		return instrucciones;
 	}
-
+	
+	@Override
+	public boolean equals(Object obj){
+		if (obj instanceof SeccionItem){			
+			SeccionItem seccion = (SeccionItem) obj;
+			return seccion.getId() == this.id;
+		}
+		return false;		
+	}
+	
+	public String toString(){
+		return nombre;
+	}
 }

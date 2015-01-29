@@ -37,8 +37,8 @@ import javafx.util.Callback;
 public class ComponenteRecetas extends BorderPane{
 
 	// lista que contiene los datos
-	private List<IngredienteItem> ingredientes;
-	private List<InstruccionItem> instrucciones;
+//	private List<IngredienteItem> ingredientes;
+//	private List<InstruccionItem> instrucciones;
 	// lista "observable" que envuelve a la lista "variables" 
 	private ObservableList<IngredienteItem> ingredientesList;
 	private ObservableList<InstruccionItem> instrucionesList;
@@ -109,12 +109,9 @@ public class ComponenteRecetas extends BorderPane{
 
 	public void setSeccion(SeccionItem seccion2) {
 		this.seccion = seccion2;
-		seccion.setId(seccion.getId());
 		seccionText.setText(seccion.getNombre());
-		ingredientes = seccion.getIngredientes();
-		ingredientesList = FXCollections.observableList(ingredientes);
-		instrucciones = seccion.getInstrucciones();
-		instrucionesList = FXCollections.observableList(instrucciones);
+		ingredientesList = FXCollections.observableList(seccion.getIngredientes());
+		instrucionesList = FXCollections.observableList(seccion.getInstrucciones());
 
 		instruccionTable.setItems(instrucionesList);
 		ingredienteTable.setItems(ingredientesList);
@@ -399,6 +396,7 @@ public class ComponenteRecetas extends BorderPane{
 					seccion.getInstrucciones().add(instruccionitem);
 					instrucionesList = FXCollections.observableList(seccion.getInstrucciones());
 					instruccionTable.setItems(instrucionesList);
+					instruccionTable.getSelectionModel().clearSelection();
 				}
 
 
@@ -425,10 +423,12 @@ public class ComponenteRecetas extends BorderPane{
 
 			Optional<ButtonType> result = alert.showAndWait();
 			if (result.get() == ButtonType.OK){
-				for (InstruccionItem instruccionitem : instruccionTable.getSelectionModel().getSelectedItems()) {
-					seccion.getInstrucciones().remove(instruccionitem);
-					instrucionesList = FXCollections.observableList(seccion.getInstrucciones());
-					instruccionTable.setItems(instrucionesList);
+				for (InstruccionItem instruccionIndex: instruccionTable.getSelectionModel().getSelectedItems()) {
+//					seccion.getInstrucciones().remove(instruccionitem);
+//					instrucionesList = FXCollections.observableList(seccion.getInstrucciones());
+//					instruccionTable.setItems(instrucionesList);
+					
+					instrucionesList.remove(instruccionIndex);
 				}
 			}
 		}
