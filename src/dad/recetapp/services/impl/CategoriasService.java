@@ -93,7 +93,7 @@ public class CategoriasService implements ICategoriaServices {
 		CategoriaItem categoria = null;
 		try {
 			Connection conn = BaseDatos.getConnection();
-			PreparedStatement statment = conn.prepareStatement("select * from categorias when id = ?");
+			PreparedStatement statment = conn.prepareStatement("select * from categorias where id = ?");
 			statment.setLong(1, id);
 			ResultSet rs = statment.executeQuery();
 			if (rs.next()) {

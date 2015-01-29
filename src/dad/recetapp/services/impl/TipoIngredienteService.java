@@ -90,7 +90,7 @@ public class TipoIngredienteService implements ITipoIngredienteService {
 		TipoIngredienteItem tipo = null;
 		try {
 			Connection conn = BaseDatos.getConnection();
-			PreparedStatement statment = conn.prepareStatement("select * from tipos_ingredientes when id = ?");
+			PreparedStatement statment = conn.prepareStatement("select * from tipos_ingredientes where id = ?");
 			statment.setLong(1, id);
 			ResultSet rs = statment.executeQuery();
 			if (rs.next()) {

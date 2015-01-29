@@ -478,7 +478,7 @@ public class RecetasController {
 		}else{
 			Alert alert = new Alert(AlertType.CONFIRMATION);
 			alert.setTitle("Eliminar");
-			alert.setHeaderText("Eliminar Ingrediente");
+			alert.setHeaderText("Error Eliminar");
 			alert.setContentText("¿ Seguro que desea eliminar los elemento(s)?");
 
 			Optional<ButtonType> result = alert.showAndWait();

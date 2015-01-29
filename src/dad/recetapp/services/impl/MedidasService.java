@@ -93,7 +93,7 @@ public class MedidasService implements IMedidasService {
 		MedidaItem medida = null;
 		try {
 			Connection conn = BaseDatos.getConnection();
-			PreparedStatement statment = conn.prepareStatement("select * from medidas when id = ?");
+			PreparedStatement statment = conn.prepareStatement("select * from medidas where id = ?");
 			statment.setLong(1, id);
 			ResultSet rs = statment.executeQuery();
 			if (rs.next()) {

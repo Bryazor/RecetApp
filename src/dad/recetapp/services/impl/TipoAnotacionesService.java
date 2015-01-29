@@ -90,7 +90,7 @@ public class TipoAnotacionesService implements ITipoAnotacionesService {
 		TipoAnotacionItem tipo = null;
 		try {
 			Connection conn = BaseDatos.getConnection();
-			PreparedStatement statment = conn.prepareStatement("select * from tipos_anotaciones when id = ?");
+			PreparedStatement statment = conn.prepareStatement("select * from tipos_anotaciones where id = ?");
 			statment.setLong(1, id);
 			ResultSet rs = statment.executeQuery();
 			if (rs.next()) {
