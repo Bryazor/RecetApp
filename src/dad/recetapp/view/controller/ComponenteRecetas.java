@@ -235,7 +235,14 @@ public class ComponenteRecetas extends BorderPane{
 
 		});
 
-		
+		seccionText.textProperty().addListener(new ChangeListener<String>() {
+			@Override
+			public void changed(ObservableValue<? extends String> observable,
+					String oldValue, String newValue) {
+
+				tab.setText(seccionText.getText());
+			}
+		});
 	}
 
 	// Event Listener on Button[#nuevoIngredienteButton].onAction

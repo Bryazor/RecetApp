@@ -109,7 +109,7 @@ public class NuevaRecetaController {
 
 				ComponenteRecetas comp = new ComponenteRecetas();
 
-
+				comp.setTab(nuevo);
 				nuevo.setContent(comp);
 
 				nuevo.onSelectionChangedProperty().set( new EventHandler<Event>() {

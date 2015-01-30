@@ -102,7 +102,7 @@ public class EditarRecetaController {
 
 				ComponenteRecetas comp = new ComponenteRecetas();
 
-
+				comp.setTab(nuevo);
 				nuevo.setContent(comp);
 
 				nuevo.onSelectionChangedProperty().set( new EventHandler<Event>() {
@@ -202,6 +202,7 @@ public class EditarRecetaController {
 			for (SeccionItem seccionItem : secciones) {
 				Tab nuevo =new Tab(seccionItem.getNombre());
 				ComponenteRecetas com = new ComponenteRecetas();
+				com.setTab(nuevo);
 				com.setSeccion(seccionItem);
 				nuevo.setContent(com);
 				nuevo.onSelectionChangedProperty().set( new EventHandler<Event>() {
@@ -217,6 +218,7 @@ public class EditarRecetaController {
 		}else{
 			Tab nuevo =new Tab("Sin titulo");
 			ComponenteRecetas com = new ComponenteRecetas();
+			com.setTab(nuevo);
 			nuevo.setContent(com);
 			nuevo.onSelectionChangedProperty().set( new EventHandler<Event>() {
 
