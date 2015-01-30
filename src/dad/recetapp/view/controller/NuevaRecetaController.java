@@ -112,14 +112,6 @@ public class NuevaRecetaController {
 				comp.setTab(nuevo);
 				nuevo.setContent(comp);
 
-				nuevo.onSelectionChangedProperty().set( new EventHandler<Event>() {
-
-					@Override
-					public void handle(Event event) {
-						nuevo.setText(comp.getSeccion().getNombre());
-
-					}
-				});
 				tabPane.getTabs().add(tabPane.getTabs().size()-1,nuevo);
 				tabPane.getSelectionModel().select(nuevo);
 
