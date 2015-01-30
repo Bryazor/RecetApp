@@ -10,6 +10,8 @@ import dad.recetapp.services.items.RecetaItem;
 import dad.recetapp.services.items.SeccionItem;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
@@ -118,6 +120,7 @@ public class EditarRecetaController {
 		});
 
 
+	
 	}
 
 	// Event Listener on Button.onAction
@@ -201,6 +204,14 @@ public class EditarRecetaController {
 				ComponenteRecetas com = new ComponenteRecetas();
 				com.setSeccion(seccionItem);
 				nuevo.setContent(com);
+				nuevo.onSelectionChangedProperty().set( new EventHandler<Event>() {
+
+					@Override
+					public void handle(Event event) {
+						nuevo.setText(com.getSeccion().getNombre());
+
+					}
+				});
 				tabPane.getTabs().add(0, nuevo);
 			}
 		}else{

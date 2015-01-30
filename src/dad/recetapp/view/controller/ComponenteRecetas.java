@@ -235,6 +235,7 @@ public class ComponenteRecetas extends BorderPane{
 
 		});
 
+		
 	}
 
 	// Event Listener on Button[#nuevoIngredienteButton].onAction
