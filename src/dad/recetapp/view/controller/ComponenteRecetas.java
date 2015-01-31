@@ -261,8 +261,9 @@ public class ComponenteRecetas extends BorderPane{
 			ventana.initOwner(borderpane.getScene().getWindow());
 			ventana.initModality(Modality.WINDOW_MODAL);
 			ventana.showAndWait();
-			if(!(((NuevoIngredienteController)loader.getController()).getIngrediente()==null)){
-				IngredienteItem ingredienteitem = ((NuevoIngredienteController)loader.getController()).getIngrediente();
+			NuevoIngredienteController nuevoIngredienteController = (NuevoIngredienteController)loader.getController();
+			if(!(nuevoIngredienteController.getIngrediente()==null)){
+				IngredienteItem ingredienteitem = nuevoIngredienteController.getIngrediente();
 				seccion.getIngredientes().add(ingredienteitem);
 				ingredientesList = FXCollections.observableList(seccion.getIngredientes());
 				ingredienteTable.setItems(ingredientesList);
@@ -299,10 +300,11 @@ public class ComponenteRecetas extends BorderPane{
 				ventana.initOwner(borderpane.getScene().getWindow());
 				ventana.initModality(Modality.WINDOW_MODAL);
 				IngredienteItem ingViejo = ingredienteTable.getSelectionModel().getSelectedItem();
-				((EditarIngredienteController)loader.getController()).setIngrediente(ingViejo);
+				EditarIngredienteController editarIngredienteController = (EditarIngredienteController)loader.getController();
+				editarIngredienteController.setIngrediente(ingViejo);
 				ventana.showAndWait();
-				if((((EditarIngredienteController)loader.getController()).isGuardar())){
-					IngredienteItem ingredienteitem = ((EditarIngredienteController)loader.getController()).getIngrediente();
+				if((editarIngredienteController.isGuardar())){
+					IngredienteItem ingredienteitem = editarIngredienteController.getIngrediente();
 					seccion.getIngredientes().remove(ingViejo);
 					seccion.getIngredientes().add(ingredienteitem);
 					ingredientesList = FXCollections.observableList(seccion.getIngredientes());
@@ -357,8 +359,9 @@ public class ComponenteRecetas extends BorderPane{
 			ventana.initOwner(borderpane.getScene().getWindow());
 			ventana.initModality(Modality.WINDOW_MODAL);
 			ventana.showAndWait();
-			if(!(((NuevaInstruccionController)loader.getController()).getInstruccion()==null)){
-				InstruccionItem instruccionitem = ((NuevaInstruccionController)loader.getController()).getInstruccion();
+			NuevaInstruccionController nuevaInstruccionController = (NuevaInstruccionController)loader.getController();
+			if(!(nuevaInstruccionController.getInstruccion()==null)){
+				InstruccionItem instruccionitem = nuevaInstruccionController.getInstruccion();
 				seccion.getInstrucciones().add(instruccionitem);
 				instrucionesList = FXCollections.observableList(seccion.getInstrucciones());
 				instruccionTable.setItems(instrucionesList);
@@ -395,10 +398,11 @@ public class ComponenteRecetas extends BorderPane{
 				ventana.initOwner(borderpane.getScene().getWindow());
 				ventana.initModality(Modality.WINDOW_MODAL);
 				InstruccionItem inViejo = instruccionTable.getSelectionModel().getSelectedItem();
-				((EditarInstruccionController)loader.getController()).setInstruccion(inViejo);
+				EditarInstruccionController editarInstruccionController = (EditarInstruccionController)loader.getController();
+				editarInstruccionController.setInstruccion(inViejo);
 				ventana.showAndWait();
-				if((((EditarInstruccionController)loader.getController()).isGuardar())){
-					InstruccionItem instruccionitem = ((EditarInstruccionController)loader.getController()).getInstruccion();
+				if((editarInstruccionController.isGuardar())){
+					InstruccionItem instruccionitem = editarInstruccionController.getInstruccion();
 					seccion.getInstrucciones().remove(inViejo);
 					seccion.getInstrucciones().add(instruccionitem);
 					instrucionesList = FXCollections.observableList(seccion.getInstrucciones());
