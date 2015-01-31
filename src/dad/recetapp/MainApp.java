@@ -2,6 +2,7 @@ package dad.recetapp;
 
 import java.io.IOException;
 
+import dad.recetapp.db.BaseDatos;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
@@ -9,6 +10,8 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -41,8 +44,18 @@ public class MainApp extends Application {
 			@Override
 			public void handle(ActionEvent event) {
 				initStage.close(); 
-				initStageRoot();
-				showMainFrame();
+				if(BaseDatos.test()){
+					initStageRoot();
+					showMainFrame();
+				}else{
+					Alert alertError = new Alert(AlertType.ERROR);
+					alertError.setTitle("Error");
+					alertError.setHeaderText("Error ");
+					alertError.setContentText("Se ha producido un error al conectarse a la base de datos");
+
+					alertError.showAndWait();
+				}
+				
 			}
 		}));
 		timeline.play();
