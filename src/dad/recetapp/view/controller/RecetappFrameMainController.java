@@ -5,6 +5,8 @@ import java.io.IOException;
 import dad.recetapp.MainApp;
 import dad.recetapp.services.ServiceException;
 import dad.recetapp.services.ServiceLocator;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
@@ -47,8 +49,17 @@ public class RecetappFrameMainController {
 			recetasTab.setContent(value);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			error(e.getMessage());
 		}
+		
+		recetasTab.onSelectionChangedProperty().set(new EventHandler<Event>() {
+
+			@Override
+			public void handle(Event event) {
+				initialize();
+
+			}
+		});
 		
 	}
 
