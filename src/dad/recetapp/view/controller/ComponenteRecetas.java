@@ -119,6 +119,14 @@ public class ComponenteRecetas extends BorderPane{
 	@FXML
 	public void initialize(){
 		seccionText.setText("Sin titulo");
+		tab = new Tab("Sin titulo");
+		
+		seccionText.textProperty().addListener(new ChangeListener<String>() {
+			@Override
+			public void changed(ObservableValue<? extends String> observable,String oldValue, String newValue) {
+				tab.setText(seccionText.getText());
+			}
+		});
 		
 		nuevoIngredienteButton.setGraphic(new ImageView("dad/recetapp/ui/images/add-icon-20x20.png"));
 		editarIngredienteButton.setGraphic(new ImageView("dad/recetapp/ui/images/edit-icon-20x20.png"));
@@ -235,14 +243,6 @@ public class ComponenteRecetas extends BorderPane{
 
 		});
 
-		seccionText.textProperty().addListener(new ChangeListener<String>() {
-			@Override
-			public void changed(ObservableValue<? extends String> observable,
-					String oldValue, String newValue) {
-
-				tab.setText(seccionText.getText());
-			}
-		});
 	}
 
 	// Event Listener on Button[#nuevoIngredienteButton].onAction

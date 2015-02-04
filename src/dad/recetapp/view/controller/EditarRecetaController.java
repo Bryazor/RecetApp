@@ -10,8 +10,6 @@ import dad.recetapp.services.items.RecetaItem;
 import dad.recetapp.services.items.SeccionItem;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
