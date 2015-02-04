@@ -140,7 +140,7 @@
 			<tabs>
 				<Tab fx:id="seccionTab" text="Sin Titulo">
 					<content>
-						<ComponenteRecetas />
+						
 					</content>
 				</Tab>
 				<Tab fx:id="nuevaTab" text="+">

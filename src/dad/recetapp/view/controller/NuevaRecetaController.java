@@ -91,14 +91,12 @@ public class NuevaRecetaController {
 
 		nuevaTab.setClosable(false);
 
-		seccionTab.onSelectionChangedProperty().set( new EventHandler<Event>() {
+		
+		
+		ComponenteRecetas comp = new ComponenteRecetas();
 
-			@Override
-			public void handle(Event event) {
-				seccionTab.setText(((ComponenteRecetas)seccionTab.getContent()).getSeccion().getNombre());
-
-			}
-		});
+		comp.setTab(seccionTab);
+		seccionTab.setContent(comp);
 
 
 		nuevaTab.onSelectionChangedProperty().set(new EventHandler<Event>() {

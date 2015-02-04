@@ -119,7 +119,6 @@ public class ComponenteRecetas extends BorderPane{
 	@FXML
 	public void initialize(){
 		seccionText.setText("Sin titulo");
-		tab = new Tab("Sin titulo");
 		
 		seccionText.textProperty().addListener(new ChangeListener<String>() {
 			@Override
